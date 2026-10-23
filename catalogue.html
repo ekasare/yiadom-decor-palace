@@ -54,6 +54,7 @@
     .item__body p { font-size: .72rem; line-height: 1.45; color: var(--muted); margin: 0 0 2.5mm; }
     .item__price { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: .5rem; font-size: .7rem; border-top: 1px dashed #e0d3b8; padding-top: 2mm; }
     .item__price span { color: var(--gold-deep); font-weight: 500; letter-spacing: .04em; }
+    .item__price span.has-price { font: 700 1.05rem/1 var(--serif); color: var(--green-800); letter-spacing: 0; }
     .item__price a { color: #128c4a; font-weight: 600; text-decoration: none; white-space: nowrap; }
 
     /* Cover */
@@ -148,7 +149,7 @@
       fragrance: "Reed diffusers & aroma gift sets",
       christmas: "Festive favourites & gift ideas",
     };
-    const wa = (p) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hello Yiadom Decor Palace! I'd like to order ${p.code} – ${p.name}. What is the price?`)}`;
+    const wa = (p) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hello Yiadom Decor Palace! I'd like to order ${p.code} – ${p.name}${p.price != null ? ` (${formatPrice(p)})` : ""}. Is it available?`)}`;
     const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
     let pageNo = 0;
@@ -164,7 +165,7 @@
         <div class="item__body">
           <h3>${esc(p.name)}</h3>
           <p>${esc(p.desc)}</p>
-          <div class="item__price"><span>Price on request</span><a href="${wa(p)}" target="_blank" rel="noopener">Order ›</a></div>
+          <div class="item__price"><span class="${p.price == null ? "" : "has-price"}">${formatPrice(p)}</span><a href="${wa(p)}" target="_blank" rel="noopener">Order ›</a></div>
         </div>
       </article>`;
 
@@ -223,7 +224,7 @@
           <h2>Seen something <em>you love?</em></h2>
           <ol class="steps">
             <li><div><strong>Note the item code</strong> — e.g. YDP-012 — shown on every product.</div></li>
-            <li><div><strong>Send it to us on WhatsApp</strong> at 027 595 7777. We’ll reply with the price and availability.</div></li>
+            <li><div><strong>Send it to us on WhatsApp</strong> at 027 595 7777. We’ll confirm availability and arrange payment.</div></li>
             <li><div><strong>Pick up or arrange delivery</strong> — visit the Palace in Kumasi, or ask us about delivery to your home or business.</div></li>
             <li><div><strong>Need ideas?</strong> Send a photo of your space and we’ll suggest pieces that fit — interior or exterior.</div></li>
           </ol>
@@ -234,7 +235,7 @@
             <div><b>Follow</b>@yiadomdecorpalace<br>TikTok · Instagram · Facebook</div>
           </div>
           <p class="order__sign">Let’s grow together ♡</p>
-          <p style="font-size:.78rem;color:rgba(250,246,238,.6);margin:3mm 0 0">Products shown are a selection of our range — new stock arrives regularly. Prices and availability on request.</p>
+          <p style="font-size:.78rem;color:rgba(250,246,238,.6);margin:3mm 0 0">Products shown are a selection of our range — new stock arrives regularly. Prices in Ghana cedis (GH₵) and subject to availability.</p>
         </div>
         ${foot()}
       </section>`;

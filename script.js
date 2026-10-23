@@ -62,7 +62,7 @@ function render() {
         <span class="card__tag">${CAT_LABEL[p.cat]}</span>
         ${p.xmas && filter !== "christmas" ? '<span class="card__tag card__tag--xmas">🎄 Xmas</span>' : ""}
       </div>
-      <div class="card__body"><h3>${p.name}</h3><span>Ask price on WhatsApp →</span></div>
+      <div class="card__body"><h3>${p.name}</h3><strong class="card__price">${formatPrice(p)}</strong><span>Order on WhatsApp →</span></div>
     </button>`).join("");
   moreBtn.style.display = shown >= visible.length ? "none" : "";
 }
@@ -92,7 +92,8 @@ function openLb(i) {
   $("#lbCat").textContent = `${p.code} · ${CAT_LABEL[p.cat]}` + (p.xmas ? " · Christmas Pick" : "");
   $("#lbTitle").textContent = p.name;
   $("#lbDesc").textContent = p.desc;
-  $("#lbWa").href = waLink(`Hello Yiadom Decor Palace! I'm interested in the "${p.name}" (${p.code}) I saw on your website. What is the price and is it available?`);
+  $("#lbPrice").textContent = formatPrice(p);
+  $("#lbWa").href = waLink(`Hello Yiadom Decor Palace! I'd like to order the "${p.name}" (${p.code}${p.price != null ? `, ${formatPrice(p)}` : ""}) I saw on your website. Is it available?`);
   lb.classList.add("is-open"); lb.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
   $("#lbClose").focus();
