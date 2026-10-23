@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product Catalogue | Yiadom Decor Palace, Kumasi</title>
+  <meta name="description" content="Yiadom Decor Palace product catalogue — artificial plants & trees, pots & planters, vases and home fragrance. Order on WhatsApp 027 595 7777.">
+  <meta name="theme-color" content="#0b3326">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b3326'/%3E%3Cpath d='M12 30 32 13l20 17' fill='none' stroke='%23d4af5f' stroke-width='4'/%3E%3Cpath d='M32 46c-7-3-9-10-6-16 5 2 7 9 6 16Zm0 0c7-3 9-10 6-16-5 2-7 9-6 16Zm0 0c-3-6-2-13 0-17 2 4 3 11 0 17Z' fill='%23d4af5f'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-900: #072219; --green-800: #0b3326; --green-700: #114533; --green-600: #1a5a43;
+      --gold: #d4af5f; --gold-deep: #b8913d;
+      --gold-grad: linear-gradient(135deg, #f1d68e 0%, #d4af5f 45%, #a8822f 100%);
+      --cream: #faf6ee; --cream-2: #f3ecdf; --ink: #1d2a24; --muted: #5d6b64; --red: #8f1d22;
+      --serif: "Cormorant Garamond", Georgia, serif; --sans: "Jost", system-ui, sans-serif; --script: "Pinyon Script", cursive;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--sans); color: var(--ink); background: #d9d2c4; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+
+    /* Toolbar (screen only) */
+    .bar { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; padding: .75rem 16px; background: var(--green-800); border-bottom: 1px solid rgba(212,175,95,.3); }
+    .bar__title { font: 700 1.15rem/1 var(--serif); letter-spacing: .12em; color: #f6e7bd; margin-right: auto; text-decoration: none; }
+    .bar__title small { display: block; font: 500 .58rem/1 var(--sans); letter-spacing: .35em; color: var(--gold); margin-top: .3rem; }
+    .bar a.btn, .bar button { font: 500 .85rem/1 var(--sans); padding: .7em 1.1em; border-radius: 999px; border: 1px solid rgba(212,175,95,.55); background: transparent; color: #f6e7bd; text-decoration: none; cursor: pointer; }
+    .bar .btn--gold { background: var(--gold-grad); color: var(--green-900); border-color: transparent; }
+    .jump { display: flex; gap: .5rem; overflow-x: auto; padding: .7rem 16px; background: var(--cream); border-bottom: 1px solid #e3d6bc; position: sticky; top: 58px; z-index: 9; }
+    .jump a { flex: none; font-size: .82rem; padding: .5em 1em; border-radius: 999px; border: 1px solid #d9ccb2; background: #fff; color: var(--green-800); text-decoration: none; }
+
+    /* Pages */
+    .pages { padding: 24px 16px 60px; display: grid; gap: 24px; justify-items: center; }
+    .page { width: 100%; max-width: 210mm; background: var(--cream); position: relative; overflow: hidden; box-shadow: 0 20px 50px -25px rgba(0,0,0,.45); display: flex; flex-direction: column; }
+    .page__inner { padding: 14mm 12mm 10mm; flex: 1; display: flex; flex-direction: column; }
+    .page__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; border-bottom: 1.5px solid var(--gold); padding-bottom: 4mm; margin-bottom: 6mm; }
+    .page__head h2 { font: 600 2.1rem/1 var(--serif); color: var(--green-800); margin: 0; }
+    .page__head h2 em { color: var(--gold-deep); }
+    .page__head p { margin: 0; font-size: .7rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold-deep); text-align: right; }
+    .page__foot { display: flex; justify-content: space-between; padding: 4mm 12mm; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; background: var(--green-800); color: var(--gold); }
+    .page__foot span:last-child { color: #f6e7bd; }
+
+    .items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+    .item { background: #fff; border: 1px solid #eadfca; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; break-inside: avoid; }
+    .item__img { aspect-ratio: 4 / 5; overflow: hidden; position: relative; background: #ece4d4; }
+    .item__img img { width: 100%; height: 100%; object-fit: cover; object-position: center 72%; }
+    .item__code { position: absolute; top: 2.5mm; left: 2.5mm; background: var(--green-800); color: #f6e7bd; font: 600 .66rem/1 var(--sans); letter-spacing: .1em; padding: .45em .7em; border-radius: 999px; }
+    .item__xmas { position: absolute; top: 2.5mm; right: 2.5mm; background: var(--red); color: #fff; font-size: .62rem; padding: .4em .65em; border-radius: 999px; letter-spacing: .06em; }
+    .item__body { padding: 3mm 3.5mm 3.5mm; display: flex; flex-direction: column; flex: 1; }
+    .item__body h3 { font: 600 1.08rem/1.15 var(--serif); color: var(--green-800); margin: 0 0 1.5mm; }
+    .item__body p { font-size: .72rem; line-height: 1.45; color: var(--muted); margin: 0 0 2.5mm; }
+    .item__price { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: .5rem; font-size: .7rem; border-top: 1px dashed #e0d3b8; padding-top: 2mm; }
+    .item__price span { color: var(--gold-deep); font-weight: 500; letter-spacing: .04em; }
+    .item__price a { color: #128c4a; font-weight: 600; text-decoration: none; white-space: nowrap; }
+
+    /* Cover */
+    .cover { background: radial-gradient(120% 90% at 85% 10%, var(--green-600) 0%, var(--green-800) 45%, var(--green-900) 100%); color: var(--cream); }
+    .cover .page__inner { align-items: center; text-align: center; justify-content: space-between; padding-top: 16mm; }
+    .logo { color: var(--gold); display: flex; flex-direction: column; align-items: center; }
+    .logo svg { width: 64px; height: 64px; }
+    .logo strong { font: 700 3rem/1 var(--serif); letter-spacing: .14em; color: #f6e7bd; margin-top: 2mm; }
+    .logo small { font: 500 .8rem/1 var(--sans); letter-spacing: .5em; color: var(--gold); margin-top: 2mm; }
+    .logo i { font-style: normal; font-size: .62rem; letter-spacing: .3em; color: rgba(250,246,238,.7); margin-top: 3mm; }
+    .cover h1 { font: 600 3.4rem/1 var(--serif); margin: 8mm 0 0; color: #fbf3dc; }
+    .cover h1 em { color: var(--gold); font-style: italic; }
+    .cover__script { font: 2.2rem/1.2 var(--script); color: var(--gold); margin: 2mm 0 0; }
+    .cover__collage { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; width: 100%; margin: 8mm 0; }
+    .cover__collage img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 12px; border: 1.5px solid rgba(212,175,95,.5); }
+    .cover__collage img:nth-child(2) { transform: translateY(-6mm); }
+    .cover__contact { font-size: .82rem; letter-spacing: .08em; color: rgba(250,246,238,.85); line-height: 1.8; }
+    .cover__contact strong { color: var(--gold); font-weight: 500; }
+    .cover .page__foot { background: transparent; border-top: 1px solid rgba(212,175,95,.3); }
+
+    .xmas-page .page__head h2 em { color: var(--red); }
+    .intro { font-size: .85rem; color: var(--muted); margin: -2mm 0 6mm; max-width: 140mm; }
+
+    /* How to order */
+    .order { background: var(--green-800); color: var(--cream); }
+    .order .page__inner { justify-content: center; }
+    .order h2 { font: 600 3rem/1.05 var(--serif); color: #fbf3dc; margin: 0 0 4mm; }
+    .order h2 em { color: var(--gold); }
+    .steps { list-style: none; padding: 0; margin: 6mm 0; display: grid; gap: 5mm; counter-reset: s; }
+    .steps li { display: flex; gap: 5mm; align-items: flex-start; font-size: .95rem; color: rgba(250,246,238,.88); }
+    .steps li::before { counter-increment: s; content: counter(s); flex: 0 0 11mm; height: 11mm; border-radius: 50%; display: grid; place-items: center; background: var(--gold-grad); color: var(--green-900); font: 700 1.3rem/1 var(--serif); }
+    .steps strong { color: #f6e7bd; font-weight: 500; }
+    .contact-box { margin-top: 6mm; padding: 6mm; border: 1px solid rgba(212,175,95,.45); border-radius: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 8mm; font-size: .88rem; }
+    .contact-box b { display: block; font-size: .66rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 1mm; }
+    .contact-box a { color: #fbf3dc; text-decoration: none; }
+    .order__sign { font: 2.4rem/1.1 var(--script); color: var(--gold); margin: 10mm 0 0; }
+    .order .page__foot { background: var(--green-900); }
+
+    @media (max-width: 640px) {
+      .items { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .page__inner { padding: 22px 14px 16px; }
+      .page__head { flex-direction: column; align-items: flex-start; }
+      .page__head p { text-align: left; }
+      .logo strong { font-size: 2.2rem; }
+      .cover h1 { font-size: 2.4rem; }
+      .contact-box { grid-template-columns: 1fr; }
+      .order h2 { font-size: 2.2rem; }
+      .bar__title { width: 100%; }
+      .jump { top: 104px; }
+    }
+
+    /* PRINT / PDF: exact A4 pages */
+    @page { size: A4; margin: 0; }
+    @media print {
+      body { background: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .bar, .jump { display: none; }
+      .pages { padding: 0; gap: 0; display: block; }
+      .page { width: 210mm; max-width: none; height: 297mm; box-shadow: none; break-after: page; page-break-after: always; }
+      .page:last-child { break-after: auto; page-break-after: auto; }
+      .items { grid-template-columns: repeat(3, 1fr) !important; }
+      .page__inner { padding: 10mm 11mm 6mm; }
+      .page__head { margin-bottom: 4mm; padding-bottom: 3mm; }
+      .intro { margin: -1mm 0 4mm; font-size: .78rem; }
+      .items { gap: 4mm; }
+      .item__img { aspect-ratio: auto; height: 42mm; }
+      .item__body { padding: 2.5mm 3mm 3mm; }
+      .item__body h3 { font-size: 1rem; }
+      .item__body p { font-size: .66rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 2mm; }
+      .page__foot { padding: 3mm 11mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <a class="bar__title" href="index.html">YIADOM<small>DECOR PALACE · CATALOGUE</small></a>
+    <a class="btn" href="index.html">← Website</a>
+    <button onclick="window.print()">Print</button>
+    <a class="btn btn--gold" href="Yiadom-Decor-Palace-Catalogue.pdf" download>Download PDF</a>
+  </div>
+  <nav class="jump" id="jump" aria-label="Catalogue sections"></nav>
+
+  <div class="pages" id="pages"></div>
+
+  <script src="products.js"></script>
+  <script>
+    const PER_PAGE = 9;
+    const ORDER = ["plants", "pots", "vases", "fragrance"];
+    const SUB = {
+      plants: "Lifelike greenery — no watering, no wilting",
+      pots: "Designer pots for interior & exterior",
+      vases: "Floor vases & art glass centrepieces",
+      fragrance: "Reed diffusers & aroma gift sets",
+      christmas: "Festive favourites & gift ideas",
+    };
+    const wa = (p) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hello Yiadom Decor Palace! I'd like to order ${p.code} – ${p.name}. What is the price?`)}`;
+    const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+    let pageNo = 0;
+    const foot = () => `<div class="page__foot"><span>Yiadom Decor Palace · Kumasi</span><span>WhatsApp 027 595 7777 · ${++pageNo}</span></div>`;
+
+    const item = (p) => `
+      <article class="item">
+        <div class="item__img">
+          <img src="images/${p.img}.jpg" alt="${esc(p.name)}">
+          <span class="item__code">${p.code}</span>
+          ${p.xmas ? '<span class="item__xmas">🎄 Xmas</span>' : ""}
+        </div>
+        <div class="item__body">
+          <h3>${esc(p.name)}</h3>
+          <p>${esc(p.desc)}</p>
+          <div class="item__price"><span>Price on request</span><a href="${wa(p)}" target="_blank" rel="noopener">Order ›</a></div>
+        </div>
+      </article>`;
+
+    function section(id, title, list, extraClass = "", intro = "") {
+      let html = "";
+      for (let i = 0; i < list.length; i += PER_PAGE) {
+        const first = i === 0;
+        html += `
+          <section class="page ${extraClass}" ${first ? `id="${id}"` : ""}>
+            <div class="page__inner">
+              <div class="page__head"><h2>${title}</h2><p>${SUB[id]}${list.length > PER_PAGE ? ` · ${i / PER_PAGE + 1}/${Math.ceil(list.length / PER_PAGE)}` : ""}</p></div>
+              ${first && intro ? `<p class="intro">${intro}</p>` : ""}
+              <div class="items">${list.slice(i, i + PER_PAGE).map(item).join("")}</div>
+            </div>
+            ${foot()}
+          </section>`;
+      }
+      return html;
+    }
+
+    const cover = `
+      <section class="page cover" id="cover">
+        <div class="page__inner">
+          <div class="logo">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 30 32 12l22 18" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/><path fill="currentColor" d="M32 48c-8-3-11-11-7-18 6 2 8 10 7 18Z"/><path fill="currentColor" d="M32 48c8-3 11-11 7-18-6 2-8 10-7 18Z"/><path fill="currentColor" d="M32 47c-4-7-3-15 0-20 3 5 4 13 0 20Z"/></svg>
+            <strong>YIADOM</strong><small>DECOR PALACE</small><i>PLANTS • POTS • HOME DECOR</i>
+          </div>
+          <div>
+            <h1>Product <em>Catalogue</em></h1>
+            <p class="cover__script">Grand Opening &amp; Christmas 2026</p>
+          </div>
+          <div class="cover__collage">
+            <img src="images/img_1810.jpg" alt="">
+            <img src="images/photo-2026-10-22-22-24-32-3.jpg" alt="">
+            <img src="images/img_2269.jpg" alt="">
+          </div>
+          <div class="cover__contact">
+            <strong>WhatsApp</strong> 027 595 7777 &nbsp;·&nbsp; <strong>Call</strong> +1 347 344 3294<br>
+            <strong>Visit</strong> Buokrom | Ahenema Kokoben, Kumasi, Ghana<br>
+            <strong>Follow</strong> @yiadomdecorpalace — TikTok · Instagram · Facebook
+          </div>
+        </div>
+        ${foot()}
+      </section>`;
+
+    const xmasList = PRODUCTS.filter((p) => p.xmas).slice(0, PER_PAGE);
+    let html = cover;
+    html += section("christmas", "Christmas <em>Picks</em>", xmasList, "xmas-page",
+      "Our favourite pieces to dress your home, church or office for the festive season — and beautiful gifts for the people you love. Ask us about bulk and corporate gift orders.");
+    ORDER.forEach((cat) => html += section(cat, CAT_LABEL[cat].replace("&", "<em>&amp;</em>"), PRODUCTS.filter((p) => p.cat === cat)));
+
+    html += `
+      <section class="page order" id="order">
+        <div class="page__inner">
+          <p style="font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin:0 0 4mm">How to order</p>
+          <h2>Seen something <em>you love?</em></h2>
+          <ol class="steps">
+            <li><div><strong>Note the item code</strong> — e.g. YDP-012 — shown on every product.</div></li>
+            <li><div><strong>Send it to us on WhatsApp</strong> at 027 595 7777. We’ll reply with the price and availability.</div></li>
+            <li><div><strong>Pick up or arrange delivery</strong> — visit the Palace in Kumasi, or ask us about delivery to your home or business.</div></li>
+            <li><div><strong>Need ideas?</strong> Send a photo of your space and we’ll suggest pieces that fit — interior or exterior.</div></li>
+          </ol>
+          <div class="contact-box">
+            <div><b>WhatsApp</b><a href="https://wa.me/${WHATSAPP}">027 595 7777</a></div>
+            <div><b>Call</b><a href="tel:+13473443294">+1 347 344 3294</a></div>
+            <div><b>Visit</b>Buokrom | Ahenema Kokoben<br>Kumasi, Ghana</div>
+            <div><b>Follow</b>@yiadomdecorpalace<br>TikTok · Instagram · Facebook</div>
+          </div>
+          <p class="order__sign">Let’s grow together ♡</p>
+          <p style="font-size:.78rem;color:rgba(250,246,238,.6);margin:3mm 0 0">Products shown are a selection of our range — new stock arrives regularly. Prices and availability on request.</p>
+        </div>
+        ${foot()}
+      </section>`;
+
+    document.getElementById("pages").innerHTML = html;
+    document.getElementById("jump").innerHTML =
+      [["cover", "Cover"], ["christmas", "🎄 Christmas"], ...ORDER.map((c) => [c, CAT_LABEL[c]]), ["order", "How to order"]]
+        .map(([id, l]) => `<a href="#${id}">${l}</a>`).join("");
+  </script>
+</body>
+</html>
