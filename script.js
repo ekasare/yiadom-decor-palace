@@ -4,7 +4,7 @@
 
 // Grand Opening date & time (Ghana time, GMT). Example: "2026-11-21T10:00:00Z"
 // Leave as null to show "Date announcing soon" instead of a countdown.
-const GRAND_OPENING = null;
+const GRAND_OPENING = "2026-11-29T12:00:00Z";
 
 const PAGE = 12;
 
