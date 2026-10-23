@@ -1,0 +1,12 @@
+# Cloudflare Pages headers
+# Pages & scripts: always check for the latest version (so new prices show immediately)
+/*
+  Cache-Control: no-cache
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Photos & videos: cache for a week (fast loading on mobile data)
+/images/*
+  Cache-Control: public, max-age=604800
+/videos/*
+  Cache-Control: public, max-age=604800
