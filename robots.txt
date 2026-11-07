@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /till
+Disallow: /pos
 
 Sitemap: https://yiadomdecorpalace.com/sitemap.xml
