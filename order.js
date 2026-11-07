@@ -16,7 +16,13 @@
   const byCode = code => PRODUCTS.find(p => p.code === code);
   const priceOf = p => (typeof p.salePrice === "number" ? p.salePrice : p.price);
   const canOrder = p => p && typeof p.price === "number" && p.avail && Object.values(p.avail).some(n => n > 0);
-  let basket = load(), place = null, orderId = null, sending = false;
+  let basket = load(), place = null, placeChosen = false, orderId = null, sending = false;
+  // The first option (Buokrom, Ahenema Kokoben, delivery) that has everything in the basket.
+  function bestPlace() {
+    const opts = [...ORDERING.pickup.map(s => s.loc), "delivery"];
+    const fits = o => basket.every(l => { const p = byCode(l.code), loc = o === "delivery" ? ORDERING.deliveryFrom : o; return p && p.avail && (p.avail[loc] || 0) >= l.qty; });
+    return opts.find(fits) || opts.find(o => basket.some(l => { const p = byCode(l.code); return p && p.avail && p.avail[o === "delivery" ? ORDERING.deliveryFrom : o] > 0; })) || opts[0];
+  }
 
   loadLivePrices().then(() => {
     if (!ORDERING.on) return;
@@ -54,8 +60,9 @@
     const p = visible[current], box = el("#lbOrder");
     if (!p || !box) return;
     el("#lbQty").value = 1;
-    if (canOrder(p)) { box.hidden = false; el("#lbAdd").disabled = false; el("#lbAvail").textContent = "Available for " + where(p).map(w => w === "delivery" ? "delivery in Kumasi" : "pickup at " + w).join(", ") + ". Pay when you collect or on delivery."; }
-    else { box.hidden = typeof p.price !== "number"; el("#lbAdd").disabled = true; el("#lbAvail").textContent = "Not in stock to order online right now. Ask us on WhatsApp."; }
+    const avail = el("#lbAvail"), btn = el("#lbAdd");
+    if (canOrder(p)) { box.hidden = false; btn.disabled = false; btn.textContent = "Add to order"; avail.classList.remove("is-out"); avail.textContent = "Available for " + where(p).map(w => w === "delivery" ? "delivery in Kumasi" : "pickup at " + w).join(", ") + ". Pay when you collect or on delivery."; }
+    else { box.hidden = typeof p.price !== "number"; btn.disabled = true; btn.textContent = "Not available online"; avail.classList.add("is-out"); avail.textContent = "Not in stock to order online right now. Ask us on WhatsApp."; }
   }
   function add(code, qty) {
     const ex = basket.find(l => l.code === code);
@@ -70,7 +77,7 @@
   }
   const srcLoc = () => (place === "delivery" ? ORDERING.deliveryFrom : place);
   const placeName = () => (place === "delivery" ? "delivery" : (ORDERING.pickup.find(s => s.loc === place) || {}).name);
-  function open() { render(); const b = el("#basket"); b.classList.add("is-open"); b.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; }
+  function open() { if (!placeChosen) place = bestPlace(); render(); const b = el("#basket"); b.classList.add("is-open"); b.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; }
   function close() { const b = el("#basket"); b.classList.remove("is-open"); b.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; }
   function totals() {
     const sub = basket.reduce((a, l) => { const p = byCode(l.code); return a + (p ? priceOf(p) * l.qty : 0); }, 0);
@@ -91,7 +98,7 @@
       <h3 id="basketTitle">Your order</h3>
       <ul class="basket__lines">${basket.map(l => { const p = byCode(l.code); if (!p) return ""; const bad = short.find(x => x.code === l.code);
         return `<li><img src="images/${esc(p.img)}.jpg" alt=""><div><b>${esc(p.name)}</b><span>${p.code} · ${typeof p.salePrice === "number" ? `<s>${ghs(p.price)}</s> ` : ""}${ghs(priceOf(p))}${p.unit ? " / " + esc(p.unit) : ""}</span>
-          ${bad ? `<em>Only ${bad.have} available for ${esc(placeName())}</em>` : ""}</div>
+          ${bad ? `<em>${bad.have ? `Only ${bad.have} available for ${esc(placeName())}` : `Not available for ${esc(placeName())}`}${where(p).length ? " · available for " + esc(where(p).map(w => w === "delivery" ? "delivery" : "pickup at " + w).join(", ")) : ""}</em>` : ""}</div>
           <div class="qty-pick small"><button type="button" data-dec="${esc(l.code)}" aria-label="One less">−</button><span>${l.qty}</span><button type="button" data-inc="${esc(l.code)}" aria-label="One more">+</button></div>
           <strong>${ghs(priceOf(p) * l.qty)}</strong></li>`; }).join("")}</ul>
       <form class="basket__form" id="basketForm" novalidate>
@@ -120,7 +127,7 @@
       if (l.qty <= 0) basket = basket.filter(x => x !== l);
       orderId = null; save(); refreshButton(); render(keep());
     }));
-    f.querySelectorAll("input[name=place]").forEach(r => r.addEventListener("change", () => { place = r.value; orderId = null; render(keep()); }));
+    f.querySelectorAll("input[name=place]").forEach(r => r.addEventListener("change", () => { place = r.value; placeChosen = true; orderId = null; render(keep()); }));
     f.addEventListener("submit", e => { e.preventDefault(); submit(f, keep()); });
   }
   async function submit(f, form) {

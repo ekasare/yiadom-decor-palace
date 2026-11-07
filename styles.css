@@ -383,3 +383,8 @@ p { margin: 0 0 1em; }
 .basket__done { display: flex; flex-direction: column; gap: .9rem; margin-top: 1.5rem; }
 .basket__done .btn { justify-content: center; }
 @media (prefers-reduced-motion: reduce) { .basket__panel, .basket, .basket-float.bump { transition: none; animation: none; } }
+
+/* Online ordering fixes: hidden really hides; unavailable items look unavailable */
+.basket-float[hidden], .lb-order[hidden], .basket__msg[hidden] { display: none !important; }
+.lb-order .btn:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; filter: grayscale(.6); }
+.lb-order__avail.is-out { color: var(--red); font-weight: 600; }
