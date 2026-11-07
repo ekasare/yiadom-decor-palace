@@ -7,6 +7,8 @@
    so add new items at the END to keep existing codes the same.
    hidden: true = not shown on the website or catalogue (e.g. not in stock). Never delete a line:
    that would change the codes of every item after it. Remove "hidden: true" to show it again.
+   code: "YFS-001" = the item has its own code (e.g. the Yiadom Floral range) and doesn't use a YDP number.
+   unit: "stem" = price is shown as "GH₵ 25 / stem".
    ============================================================ */
 
 const WHATSAPP = "233275957777";
@@ -120,14 +122,81 @@ const PRODUCTS = [
   { img: "plant-variegated-dracaena-220", hidden: true, name: "Artificial Variegated Dracaena Tree (220 cm)", price: 1300, cat: "plants", desc: "Tall dracaena with long, fine leaves on three stems. 220 cm — an impressive height for big spaces." },
   { img: "plant-sago-palm-110", name: "Artificial Sago Palm Tree (110 cm)", price: 900, cat: "plants", desc: "Feathery sago palm fronds on a short trunk in a cream pot. 110 cm tall. Priced per tree." },
   { img: "plant-sago-palm-85", name: "Artificial Sago Palm Tree (85 cm)", price: 550, cat: "plants", desc: "A wide, full sago palm in a cream pot. 85 cm tall — tropical style for tables, patios and entrances." },
+  // Yiadom Floral: floral stems (YFS) and potted flowers (YSPF), November 2026. These have their own codes.
+  { code: "YFS-001", img: "floral-yfs-001", name: "Artificial Fern Stem", price: 25, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-002", img: "floral-yfs-002", name: "Greenery Spray", price: 34, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-003", img: "floral-yfs-003", name: "Leaf Spray", price: 40, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-004", img: "floral-yfs-004", name: "Hair Fern", price: 42, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-005", img: "floral-yfs-005", name: "Japanese Andromeda Stem", price: 24, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-006", img: "floral-yfs-006", name: "Olive Stem", price: 20, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-007", img: "floral-yfs-007", name: "Hanging Rice Pearl", price: 18, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-008", img: "floral-yfs-008", name: "Trailing Amaranthus", price: 30, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-009", img: "floral-yfs-009", name: "Spiky Tropical Stem", price: 40, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-010", img: "floral-yfs-010", name: "Trailing Asparagus", price: 35, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-011", img: "floral-yfs-011", name: "Variegated Tropical Stem", price: 30, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-012", img: "floral-yfs-012", name: "Eucalyptus Stem", price: 23, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-013", img: "floral-yfs-013", name: "Flower Spike", price: 30, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-014", img: "floral-yfs-014", name: "Trailing Eucalyptus", price: 30, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-015", img: "floral-yfs-015", name: "Money Leaf Stem", price: 24, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-016", img: "floral-yfs-016", name: "Mixed Berry Stem", price: 36, unit: "stem", cat: "floral", desc: "Decorative stem to add texture and colour to arrangements, wreaths and centrepieces." },
+  { code: "YFS-017", img: "floral-yfs-017", name: "Foam Berry Cluster", price: 24, unit: "stem", cat: "floral", desc: "Decorative stem to add texture and colour to arrangements, wreaths and centrepieces." },
+  { code: "YFS-018", img: "floral-yfs-018", name: "Hanging Tropical Stem", price: 24, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-019", img: "floral-yfs-019", name: "Mini Rose Stem", price: 40, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-020", img: "floral-yfs-020", name: "Autumn Apple Blossom Stem", price: 24, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-021", img: "floral-yfs-021", name: "One Bud Flower Stem", price: 22, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-022", img: "floral-yfs-022", name: "Grain Ear Stem", price: 27, unit: "stem", cat: "floral", desc: "Decorative stem to add texture and colour to arrangements, wreaths and centrepieces." },
+  { code: "YFS-023", img: "floral-yfs-023", name: "Mixed Rose Stem", price: 32, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-024", img: "floral-yfs-024", name: "Cherry Blossom Stem", price: 30, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-025", img: "floral-yfs-025", name: "Lily Stem", price: 60, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-026", img: "floral-yfs-026", name: "Mini Pompom Stem", price: 32, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-027", img: "floral-yfs-027", name: "Mini Rose Bud Stem", price: 24, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-028", img: "floral-yfs-028", name: "Cluster Rose Stem", price: 35, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-029", img: "floral-yfs-029", name: "Camellia Flower Stem", price: 26, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-030", img: "floral-yfs-030", name: "Maple Leaf Stem", price: 30, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-031", img: "floral-yfs-031", name: "Cascading Greenery", price: 100, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-032", img: "floral-yfs-032", name: "3D Maple Leaf Stem", price: 42, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-033", img: "floral-yfs-033", name: "Hanging Amaranthus", price: 20, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-034", img: "floral-yfs-034", name: "Hanging Spring Greenery", price: 20, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-035", img: "floral-yfs-035", name: "Cascading Eucalyptus", price: 60, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-036", img: "floral-yfs-036", name: "Veronica Flower Stem", price: 35, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-037", img: "floral-yfs-037", name: "Hanging Spanish Moss", price: 30, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-038", img: "floral-yfs-038", name: "Cascading Amaranthus", price: 30, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-039", img: "floral-yfs-039", name: "Trailing Fern", price: 15, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-040", img: "floral-yfs-040", name: "Olive Branch", price: 15, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-041", img: "floral-yfs-041", name: "Orange Leaves Stem", price: 18, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-042", img: "floral-yfs-042", name: "Calla Lily Stem", price: 15, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-043", img: "floral-yfs-043", name: "Greenery Bush", price: 20, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-044", img: "floral-yfs-044", name: "Trailing Green Leaf", price: 18, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-045", img: "floral-yfs-045", name: "Hanging Vine", price: 15, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-046", img: "floral-yfs-046", name: "Fern-Style Hanging Greenery", price: 20, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-047", img: "floral-yfs-047", name: "Mixed Greenery Bush", price: 22, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-048", img: "floral-yfs-048", name: "Lime Green Foliage", price: 20, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-049", img: "floral-yfs-049", name: "4-Head Flocked Daisy Stem", price: 24, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-050", img: "floral-yfs-050", name: "9-Head Daisy Stem", price: 40, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-051", img: "floral-yfs-051", name: "Magnolia Flower Stem", price: 50, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
+  { code: "YFS-052", img: "floral-yfs-052", name: "Decorative Fern Foliage", price: 18, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
+  { code: "YFS-053", img: "floral-yfs-053", name: "Cascading Yellow-Green Foliage", price: 18, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YSPF-001", img: "floral-yspf-001", name: "Potted Moth Orchid, 2 Stems", price: 90, cat: "potted", desc: "Elegant two-stem moth orchids (phalaenopsis) in a neat pot. Assorted colours." },
+  { code: "YSPF-002", img: "floral-yspf-002", name: "Calla Lily Style Potted Flower", price: 80, cat: "potted", desc: "Glossy blooms in a small white pot. Assorted colours." },
+  { code: "YSPF-003", img: "floral-yspf-003", name: "Autumn Mini Potted Flower", price: 90, cat: "potted", desc: "Warm autumn-toned flowers in a mini pot." },
+  { code: "YSPF-004", img: "floral-yspf-004", name: "Mini Potted Mixed Floral", price: 70, cat: "potted", desc: "Soft mixed flowers and grasses in a white mini pot." },
+  { code: "YSPF-005", img: "floral-yspf-005", name: "Potted Pineapple Grass", price: 50, cat: "potted", desc: "Spiky green grass in a white pot. Fresh and modern." },
+  { code: "YSPF-006", img: "floral-yspf-006", name: "Mini Potted Lily", price: 65, cat: "potted", desc: "Pretty lily blooms in a mini pot. Assorted colours." },
+  { code: "YSPF-007", img: "floral-yspf-007", name: "Mini Autumn Mixed Floral Pot", price: 70, cat: "potted", desc: "Dried-look autumn flowers in a patterned mini pot." },
+  { code: "YSPF-008", img: "floral-yspf-008", name: "Decorative Foam Berry Pot", price: 65, cat: "potted", desc: "Textured berry picks and greenery in a mini pot." },
+  { code: "YSPF-009", img: "floral-yspf-009", name: "Baby's Breath Mini Pot", price: 70, cat: "potted", desc: "Fluffy baby's breath in a mini pot. Assorted colours." },
+  { code: "YSPF-010", img: "floral-yspf-010", name: "Mixed Succulent Mini Pot", price: 120, cat: "potted", desc: "A cluster of lifelike succulents in a white pot." },
+  { code: "YSPF-011", img: "floral-yspf-011", name: "Potted Wildflower & Lavender", price: 100, cat: "potted", desc: "Lavender and wildflowers in a woven-look pot." },
+  { code: "YSPF-012", img: "floral-yspf-012", name: "Hanging Spider Plant", price: 100, cat: "potted", desc: "Trailing spider plant in a hanging pot, ready to hang." },
 ];
 
-const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance" };
-PRODUCTS.forEach((p, i) => { p.code = "YDP-" + String(i + 1).padStart(3, "0"); });
+const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance", floral: "Floral Stems", potted: "Potted Flowers" };
+// Items without their own code are numbered YDP-001, YDP-002 ... in list order.
+{ let n = 0; PRODUCTS.forEach(p => { if (!p.code) p.code = "YDP-" + String(++n).padStart(3, "0"); }); }
 // Hidden items keep their place (and code) above, but are taken out of what the website shows.
 for (let i = PRODUCTS.length - 1; i >= 0; i--) if (PRODUCTS[i].hidden) PRODUCTS.splice(i, 1);
 
 const formatPrice = (p) =>
   p.price == null ? "Price on request"
-  : typeof p.price === "number" ? "GH₵ " + p.price.toLocaleString("en-GH")
-  : "GH₵ " + p.price.replace(/\s*[-–]\s*/, " – ");
+  : (typeof p.price === "number" ? "GH₵ " + p.price.toLocaleString("en-GH")
+  : "GH₵ " + p.price.replace(/\s*[-–]\s*/, " – ")) + (p.unit ? " / " + p.unit : "");
