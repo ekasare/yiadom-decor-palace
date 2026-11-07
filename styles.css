@@ -324,3 +324,9 @@ p { margin: 0 0 1em; }
   .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
+
+/* Live prices from the till: sale and sold-out */
+.was { text-decoration: line-through; opacity: .55; font-weight: 400; font-size: .78em; margin-right: .3em; }
+.card__tag--status { top: auto; bottom: .7rem; }
+.card__tag--sale { background: var(--red); }
+.card__tag--out { background: #555; }

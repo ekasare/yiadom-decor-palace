@@ -61,8 +61,9 @@ function render() {
         <img src="images/${p.img}.jpg" alt="${p.name}" loading="lazy">
         <span class="card__tag">${CAT_LABEL[p.cat]}</span>
         ${p.xmas && filter !== "christmas" ? '<span class="card__tag card__tag--xmas">🎄 Xmas</span>' : ""}
+        ${p.soldOut ? '<span class="card__tag card__tag--status card__tag--out">Sold out</span>' : p.salePrice ? '<span class="card__tag card__tag--status card__tag--sale">Sale</span>' : ""}
       </div>
-      <div class="card__body"><h3>${p.name}</h3><strong class="card__price">${formatPrice(p)}</strong><span>Order on WhatsApp →</span></div>
+      <div class="card__body"><h3>${p.name}</h3><strong class="card__price">${priceHTML(p)}</strong><span>Order on WhatsApp →</span></div>
     </button>`).join("");
   moreBtn.style.display = shown >= visible.length ? "none" : "";
 }
@@ -80,6 +81,8 @@ $("#filters").addEventListener("click", (e) => { const c = e.target.closest(".ch
 moreBtn.addEventListener("click", () => { shown += PAGE; render(); });
 document.querySelectorAll("[data-jump]").forEach(a => a.addEventListener("click", () => setFilter(a.dataset.jump)));
 render();
+// Then refresh prices from the till and redraw if anything came back.
+loadLivePrices().then(ok => { if (ok) render(); });
 
 /* Lightbox */
 const lb = $("#lightbox");
@@ -92,7 +95,7 @@ function openLb(i) {
   $("#lbCat").textContent = `${p.code} · ${CAT_LABEL[p.cat]}` + (p.xmas ? " · Christmas Pick" : "");
   $("#lbTitle").textContent = p.name;
   $("#lbDesc").textContent = p.desc;
-  $("#lbPrice").textContent = formatPrice(p);
+  $("#lbPrice").innerHTML = priceHTML(p) + (p.soldOut ? " · Sold out" : "");
   $("#lbWa").href = waLink(`Hello Yiadom Decor Palace! I'd like to order the "${p.name}" (${p.code}${p.price != null ? `, ${formatPrice(p)}` : ""}) I saw on your website. Is it available?`);
   lb.classList.add("is-open"); lb.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";

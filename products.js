@@ -196,7 +196,37 @@ const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "V
 // Hidden items keep their place (and code) above, but are taken out of what the website shows.
 for (let i = PRODUCTS.length - 1; i >= 0; i--) if (PRODUCTS[i].hidden) PRODUCTS.splice(i, 1);
 
+const cedis = (v) => typeof v === "number" ? "GH₵ " + v.toLocaleString("en-GH") : "GH₵ " + String(v).replace(/\s*[-–]\s*/, " – ");
+// Plain text, e.g. for WhatsApp messages: "GH₵ 550 (was GH₵ 690)".
 const formatPrice = (p) =>
   p.price == null ? "Price on request"
-  : (typeof p.price === "number" ? "GH₵ " + p.price.toLocaleString("en-GH")
-  : "GH₵ " + p.price.replace(/\s*[-–]\s*/, " – ")) + (p.unit ? " / " + p.unit : "");
+  : p.salePrice ? cedis(p.salePrice) + (p.unit ? " / " + p.unit : "") + " (was " + cedis(p.price) + ")"
+  : cedis(p.price) + (p.unit ? " / " + p.unit : "");
+// For the page: the old price crossed out when the item is on sale.
+const priceHTML = (p) =>
+  p.price == null || !p.salePrice ? formatPrice(p)
+  : `<s class="was">${cedis(p.price)}</s> ${cedis(p.salePrice)}${p.unit ? " / " + p.unit : ""}`;
+
+/* ------------------------------------------------------------
+   LIVE PRICES FROM THE TILL (till.yiadomdecorpalace.com)
+   The till decides prices, sale prices and which products are shown, so a price changed at the
+   till shows here within a few minutes. This file still holds the photos, names and descriptions.
+   If the till can't be reached, the prices above are used.
+   ------------------------------------------------------------ */
+const TILL_FEED = "https://till.yiadomdecorpalace.com/api/public/products";
+function loadLivePrices(timeoutMs = 3500) {
+  const feed = fetch(TILL_FEED, { mode: "cors" }).then(r => (r.ok ? r.json() : null)).catch(() => null);
+  return Promise.race([feed, new Promise(r => setTimeout(() => r(null), timeoutMs))]).then(f => {
+    if (!f || !Array.isArray(f.products)) return false;
+    const live = new Map(f.products.map(t => [t.code, t]));
+    for (let i = PRODUCTS.length - 1; i >= 0; i--) {
+      const p = PRODUCTS[i], t = live.get(p.code);
+      if (!t) continue;
+      if (t.active === false) { PRODUCTS.splice(i, 1); continue; }      // hidden at the till
+      if (typeof t.price === "number") p.price = t.price;               // items priced at the counter keep their range text
+      if (typeof t.salePrice === "number") p.salePrice = t.salePrice; else delete p.salePrice;
+      p.soldOut = f.showStock && t.inStock === false;
+    }
+    return true;
+  });
+}
