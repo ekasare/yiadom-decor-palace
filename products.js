@@ -5,6 +5,8 @@
    price: number in GH₵ (e.g. 450), or text for a range (e.g. "50–200"). Leave it out to show "Price on request".
    Item codes (YDP-001, YDP-002 ...) are given automatically in this order,
    so add new items at the END to keep existing codes the same.
+   hidden: true = not shown on the website or catalogue (e.g. not in stock). Never delete a line:
+   that would change the codes of every item after it. Remove "hidden: true" to show it again.
    ============================================================ */
 
 const WHATSAPP = "233275957777";
@@ -96,32 +98,34 @@ const PRODUCTS = [
   { img: "plant-pink-bougainvillea-160-v2", name: "Artificial Pink Bougainvillea Tree (160 cm)", price: 990, cat: "plants", desc: "Bright pink bougainvillea flowers on a twisting trunk. 160 cm tall — tropical colour all year, with no watering." },
   { img: "plant-orange-japanese-maple-150-v2", name: "Artificial Orange Japanese Maple Tree (150 cm)", price: 630, cat: "plants", desc: "Warm orange maple foliage on a slim trunk. 150 cm tall — cheerful autumn colour for any corner." },
   { img: "plant-variegated-tropical-foliage-210-v2", name: "Artificial Variegated Tropical Foliage Plant (210 cm)", price: 980, cat: "plants", desc: "Large cream-and-green tropical leaves on tall stems. 210 cm — a bold statement for high ceilings and open spaces." },
-  { img: "plant-orange-red-maple-140-v2", name: "Artificial Orange-Red Maple Tree (140 cm)", price: 658, cat: "plants", desc: "Coral orange-red maple leaves in a neat pot. 140 cm tall — a lively accent for offices and living rooms." },
+  { img: "plant-orange-red-maple-140-v2", hidden: true, name: "Artificial Orange-Red Maple Tree (140 cm)", price: 658, cat: "plants", desc: "Coral orange-red maple leaves in a neat pot. 140 cm tall — a lively accent for offices and living rooms." },
   { img: "plant-golden-ginkgo-160-v2", name: "Artificial Golden Ginkgo Tree (160 cm)", price: 720, cat: "plants", desc: "Golden ginkgo leaves on a graceful trunk. 160 cm tall — brings a sunny glow to any room." },
   { img: "plant-green-maple-180-v2", name: "Artificial Green Maple Tree (180 cm)", price: 740, cat: "plants", desc: "Fresh green maple leaves on a tall, slender trunk. 180 cm — light and airy for modern interiors." },
   { img: "plant-green-bird-of-paradise-210-v2", name: "Artificial Green Bird of Paradise Plant (210 cm)", price: 850, cat: "plants", desc: "Tall upright bird of paradise leaves. 210 cm — instant tropical elegance for entrances and big rooms." },
-  { img: "plant-green-ficus-130-v2", name: "Artificial Green Ficus Tree (130 cm)", price: 550, cat: "plants", desc: "Full, rounded green ficus leaves. 130 cm tall — a classic, easy fit for homes and offices." },
+  { img: "plant-green-ficus-130-v2", hidden: true, name: "Artificial Green Ficus Tree (130 cm)", price: 550, cat: "plants", desc: "Full, rounded green ficus leaves. 130 cm tall — a classic, easy fit for homes and offices." },
   { img: "plant-red-yucca-110-v2", name: "Artificial Red Yucca Tree (110 cm)", price: 660, cat: "plants", desc: "Red-edged yucca leaves on two natural-look stems. 110 cm tall — bold and architectural." },
   { img: "plant-fiddle-leaf-fig-150-v2", name: "Artificial Fiddle Leaf Fig Tree (150 cm)", price: 730, cat: "plants", desc: "Big glossy fiddle leaves on a slim trunk. 150 cm tall — the designer favourite for living rooms." },
   { img: "plant-burnt-banana-leaf-210-v2", name: "Artificial Burnt Banana Leaf Tree (210 cm)", price: 1250, cat: "plants", desc: "Large banana leaves in rich burnt red and green. 210 cm — a dramatic tropical centrepiece." },
   { img: "plant-red-cordyline-180-v2", name: "Artificial Red Cordyline Ti Plant Tree (180 cm)", price: 860, cat: "plants", desc: "Red and green cordyline (ti plant) leaves on several stems. 180 cm tall — colourful and full." },
-  { img: "plant-multicolor-croton-125-v2", name: "Artificial Multicolor Croton Tree (125 cm)", price: 770, cat: "plants", desc: "Croton leaves in red, orange, yellow and green. 125 cm tall — a burst of colour that never fades." },
+  { img: "plant-multicolor-croton-125-v2", hidden: true, name: "Artificial Multicolor Croton Tree (125 cm)", price: 770, cat: "plants", desc: "Croton leaves in red, orange, yellow and green. 125 cm tall — a burst of colour that never fades." },
   { img: "plant-japanese-bonsai-pine-180-v2", name: "Artificial Japanese Bonsai Pine Tree (180 cm)", price: 1100, cat: "plants", desc: "Layered pine foliage on a sculpted bonsai-style trunk. 180 cm — calm, elegant and eye-catching." },
-  { img: "plant-burgundy-green-ficus-topiary-120-v2", name: "Artificial Burgundy Green Ficus Topiary Tree (120 cm)", price: 550, cat: "plants", desc: "Two tiers of burgundy and green ficus leaves on a twisted trunk. 120 cm tall." },
+  { img: "plant-burgundy-green-ficus-topiary-120-v2", hidden: true, name: "Artificial Burgundy Green Ficus Topiary Tree (120 cm)", price: 550, cat: "plants", desc: "Two tiers of burgundy and green ficus leaves on a twisted trunk. 120 cm tall." },
   { img: "plant-green-ficus-topiary-150-v2", name: "Artificial Green Ficus Topiary Tree (150 cm)", price: 650, cat: "plants", desc: "Two neat tiers of green ficus on a twisted trunk. 150 cm tall — smart for doorways and reception areas." },
   { img: "plant-variegated-ficus-topiary-180-v2", name: "Artificial Variegated Ficus Topiary Tree (180 cm)", price: 920, cat: "plants", desc: "Three tiers of variegated ficus on a twisted trunk. 180 cm tall — a polished, formal look." },
   { img: "plant-green-ficus-180-v2", name: "Artificial Green Ficus Tree (180 cm)", price: 950, cat: "plants", desc: "Dense variegated ficus foliage on a natural trunk. 180 cm tall — full and lush for larger rooms." },
   { img: "plant-green-bird-of-paradise-180-v2", name: "Artificial Green Bird of Paradise Plant (180 cm)", price: 950, cat: "plants", desc: "Broad, full bird of paradise leaves. 180 cm — a lush tropical feature for any space." },
   { img: "plant-burgundy-bird-of-paradise-150-v2", name: "Artificial Burgundy Bird of Paradise Plant (150 cm)", price: 740, cat: "plants", desc: "Burgundy-toned bird of paradise leaves. 150 cm tall — rich colour with a tropical shape." },
-  { img: "plant-double-stem-yucca-170-v2", name: "Artificial Double-Stem Yucca Tree (170 cm)", price: 800, cat: "plants", desc: "Spiky yucca leaves on two tall stems. 170 cm — clean, modern and low-maintenance." },
+  { img: "plant-double-stem-yucca-170-v2", hidden: true, name: "Artificial Double-Stem Yucca Tree (170 cm)", price: 800, cat: "plants", desc: "Spiky yucca leaves on two tall stems. 170 cm — clean, modern and low-maintenance." },
   { img: "plant-variegated-dracaena-210-v2", name: "Artificial Variegated Dracaena Tree (210 cm)", price: 900, cat: "plants", desc: "Striped dracaena leaves on several stems. 210 cm tall — fresh and full for corners and hallways." },
-  { img: "plant-variegated-dracaena-220", name: "Artificial Variegated Dracaena Tree (220 cm)", price: 1300, cat: "plants", desc: "Tall dracaena with long, fine leaves on three stems. 220 cm — an impressive height for big spaces." },
+  { img: "plant-variegated-dracaena-220", hidden: true, name: "Artificial Variegated Dracaena Tree (220 cm)", price: 1300, cat: "plants", desc: "Tall dracaena with long, fine leaves on three stems. 220 cm — an impressive height for big spaces." },
   { img: "plant-sago-palm-110", name: "Artificial Sago Palm Tree (110 cm)", price: 900, cat: "plants", desc: "Feathery sago palm fronds on a short trunk in a cream pot. 110 cm tall. Priced per tree." },
   { img: "plant-sago-palm-85", name: "Artificial Sago Palm Tree (85 cm)", price: 550, cat: "plants", desc: "A wide, full sago palm in a cream pot. 85 cm tall — tropical style for tables, patios and entrances." },
 ];
 
 const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance" };
 PRODUCTS.forEach((p, i) => { p.code = "YDP-" + String(i + 1).padStart(3, "0"); });
+// Hidden items keep their place (and code) above, but are taken out of what the website shows.
+for (let i = PRODUCTS.length - 1; i >= 0; i--) if (PRODUCTS[i].hidden) PRODUCTS.splice(i, 1);
 
 const formatPrice = (p) =>
   p.price == null ? "Price on request"
