@@ -385,6 +385,7 @@ p { margin: 0 0 1em; }
 .basket__go:disabled { opacity: .5; cursor: not-allowed; }
 .basket__small { font-size: .8rem; color: var(--muted); margin: 0; text-align: center; }
 .basket__done { display: flex; flex-direction: column; gap: .9rem; margin-top: .5rem; }
+.basket__test { background: var(--red); color: #fff; border-radius: 6px; padding: .1rem .4rem; font-size: .7rem; letter-spacing: .04em; margin-left: .3rem; }
 .basket__big { font: 600 1.25rem var(--serif); color: var(--green-800); margin: 0; }
 .basket__more { width: 100%; justify-content: center; }
 #lbView { width: 100%; justify-content: center; }

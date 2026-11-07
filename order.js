@@ -20,6 +20,10 @@
   const canOrder = p => p && typeof p.price === "number" && p.avail && Object.values(p.avail).some(n => n > 0);
   const waShop = text => `https://wa.me/${typeof WHATSAPP !== "undefined" ? WHATSAPP : "233275957777"}?text=${encodeURIComponent(text)}`;
   let basket = (read(KEY, []) || []).filter(l => l && l.code && l.qty > 0);
+  // While the till uses a Paystack test key, only someone who opened the site with ?paytest=1 sees "Pay now".
+  try { if (new URLSearchParams(location.search).has("paytest")) sessionStorage.setItem("ydp.paytest", "1"); } catch {}
+  const tester = (() => { try { return sessionStorage.getItem("ydp.paytest") === "1"; } catch { return false; } })();
+  const payOn = () => !!(ORDERING.payOnline && (!ORDERING.payTest || tester));
   let place = null, placeChosen = false, payNow = null, orderId = null, sending = false;
 
   // The first option (Buokrom, Ahenema Kokoben, delivery) that has everything in the basket.
@@ -33,7 +37,7 @@
     const back = new URLSearchParams(location.search).get("order");   // coming back from the online payment page
     if (!ORDERING.on && !back) return;
     basket = basket.filter(l => canOrder(byCode(l.code)));
-    if (payNow === null) payNow = !!ORDERING.payOnline;
+    if (payNow === null) payNow = !!payOn();
     build();
     if (back) returnedFromPayment(back);
   });
@@ -70,7 +74,7 @@
     const p = visible[current], box = el("#lbOrder");
     if (!p || !box) return;
     el("#lbQty").value = 1;
-    const avail = el("#lbAvail"), btn = el("#lbAdd"), pay = ORDERING.payOnline ? "Pay online with MoMo, or when you collect." : "Pay when you collect or on delivery.";
+    const avail = el("#lbAvail"), btn = el("#lbAdd"), pay = payOn() ? "Pay online with MoMo, or when you collect." : "Pay when you collect or on delivery.";
     if (canOrder(p)) { box.hidden = false; btn.disabled = false; btn.textContent = "Add to order"; avail.classList.remove("is-out"); avail.textContent = "Available for " + where(p).map(w => w === "delivery" ? "delivery in Kumasi" : "pickup at " + w).join(", ") + ". " + pay; }
     else { box.hidden = typeof p.price !== "number"; btn.disabled = true; btn.textContent = "Not available online"; avail.classList.add("is-out"); avail.textContent = "Not in stock to order online right now. Ask us on WhatsApp."; }
     refreshButton();
@@ -119,22 +123,22 @@
           ${ORDERING.pickup.map(s => `<label class="opt"><input type="radio" name="place" value="${esc(s.loc)}"${place === s.loc ? " checked" : ""}> <span>Collect at our <b>${esc(s.name)}</b> store</span></label>`).join("")}
           <label class="opt"><input type="radio" name="place" value="delivery"${place === "delivery" ? " checked" : ""}> <span><b>Delivery</b>: ${esc(ORDERING.deliveryNote || "within Kumasi")}${ORDERING.deliveryFee > 0 ? ` (${ghs(ORDERING.deliveryFee)})` : " (fee confirmed by phone)"}</span></label>
         </fieldset>
-        ${ORDERING.payOnline ? `<fieldset><legend>How do you want to pay?</legend>
+        ${payOn() ? `<fieldset><legend>How do you want to pay?${ORDERING.payTest ? " <small class=\"basket__test\">TEST MODE: no real money</small>" : ""}</legend>
           <label class="opt"><input type="radio" name="pay" value="now"${payNow ? " checked" : ""}> <span><b>Pay now</b> with Mobile Money (MTN, Telecel, AirtelTigo) or card</span></label>
           <label class="opt"><input type="radio" name="pay" value="later"${payNow ? "" : " checked"}> <span>Pay ${later} (cash, MoMo or card)</span></label>
         </fieldset>` : ""}
         <label>Your name<input name="name" autocomplete="name" required value="${esc(form.name || "")}"></label>
         <label>Phone number (WhatsApp if you have it)<input name="phone" type="tel" autocomplete="tel" placeholder="024 123 4567" required value="${esc(form.phone || "")}"></label>
-        ${ORDERING.payOnline && payNow ? `<label>Email for your receipt (optional)<input name="email" type="email" autocomplete="email" value="${esc(form.email || "")}"></label>` : ""}
+        ${payOn() && payNow ? `<label>Email for your receipt (optional)<input name="email" type="email" autocomplete="email" value="${esc(form.email || "")}"></label>` : ""}
         ${place === "delivery" ? `<label>Delivery address or landmark<textarea name="address" rows="2" required>${esc(form.address || "")}</textarea></label>` : ""}
         <label>Note (optional)<input name="note" maxlength="300" placeholder="e.g. best time to call" value="${esc(form.note || "")}"></label>
         <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="basket__sum"><span>Items</span><span>${ghs(t.sub)}</span></div>
         ${place === "delivery" ? `<div class="basket__sum"><span>Delivery</span><span>${t.fee ? ghs(t.fee) : "confirmed by phone"}</span></div>` : ""}
-        <div class="basket__sum basket__total"><span>${ORDERING.payOnline && payNow ? "To pay now" : "To pay " + later}</span><span>${ghs(t.total)}</span></div>
+        <div class="basket__sum basket__total"><span>${payOn() && payNow ? "To pay now" : "To pay " + later}</span><span>${ghs(t.total)}</span></div>
         <p class="basket__msg" id="basketMsg" ${short.length ? "" : "hidden"}>${short.length ? `Some items aren't available in that quantity for ${esc(placeName())}. Lower the quantity or choose another option.` : ""}</p>
-        <button class="btn btn--gold basket__go" type="submit"${short.length ? " disabled" : ""}>${ORDERING.payOnline && payNow ? `Place order and pay ${ghs(t.total)}` : "Place order"}</button>
-        <p class="basket__small">${ORDERING.payOnline && payNow ? "You'll go to our secure Paystack page to approve the payment on your phone, then come back here." : `No payment now. We'll call you to confirm, then you pay ${later}.`}</p>
+        <button class="btn btn--gold basket__go" type="submit"${short.length ? " disabled" : ""}>${payOn() && payNow ? `Place order and pay ${ghs(t.total)}` : "Place order"}</button>
+        <p class="basket__small">${payOn() && payNow ? "You'll go to our secure Paystack page to approve the payment on your phone, then come back here." : `No payment now. We'll call you to confirm, then you pay ${later}.`}</p>
       </form>`;
     const f = el("#basketForm");
     const keep = () => ({ name: f.name.value, phone: f.phone.value, email: f.email ? f.email.value : form.email, address: f.address ? f.address.value : form.address, note: f.note.value });
@@ -159,7 +163,7 @@
     write(CUSTOMER, { name: form.name, phone: form.phone, email: form.email });   // remembered on this device for next time
     sending = true; const btn = f.querySelector(".basket__go"); btn.disabled = true; btn.textContent = "Sending…";
     orderId = orderId || (crypto.randomUUID ? crypto.randomUUID().replace(/-/g, "") : Date.now().toString(36) + Math.random().toString(36).slice(2, 14));
-    const wantPay = !!(ORDERING.payOnline && payNow);
+    const wantPay = !!(payOn() && payNow);
     try {
       const r = await fetch(TILL + "/orders", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
         id: orderId, name: form.name.trim(), phone: form.phone, email: form.email, fulfilment: place === "delivery" ? "delivery" : "pickup", pickup: place === "delivery" ? undefined : place,
