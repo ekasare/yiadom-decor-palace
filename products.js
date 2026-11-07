@@ -214,10 +214,14 @@ const priceHTML = (p) =>
    If the till can't be reached, the prices above are used.
    ------------------------------------------------------------ */
 const TILL_FEED = "https://till.yiadomdecorpalace.com/api/public/products";
+let ORDERING = { on: false };   // online ordering settings from the till (order.js uses them)
+let LIVE_PRICES = null;
 function loadLivePrices(timeoutMs = 3500) {
+  if (LIVE_PRICES) return LIVE_PRICES;   // fetched once per page, shared by the shop and the basket
   const feed = fetch(TILL_FEED, { mode: "cors" }).then(r => (r.ok ? r.json() : null)).catch(() => null);
-  return Promise.race([feed, new Promise(r => setTimeout(() => r(null), timeoutMs))]).then(f => {
+  return (LIVE_PRICES = Promise.race([feed, new Promise(r => setTimeout(() => r(null), timeoutMs))]).then(f => {
     if (!f || !Array.isArray(f.products)) return false;
+    ORDERING = f.ordering || { on: false };
     const live = new Map(f.products.map(t => [t.code, t]));
     for (let i = PRODUCTS.length - 1; i >= 0; i--) {
       const p = PRODUCTS[i], t = live.get(p.code);
@@ -226,7 +230,8 @@ function loadLivePrices(timeoutMs = 3500) {
       if (typeof t.price === "number") p.price = t.price;               // items priced at the counter keep their range text
       if (typeof t.salePrice === "number") p.salePrice = t.salePrice; else delete p.salePrice;
       p.soldOut = f.showStock && t.inStock === false;
+      if (t.avail) p.avail = t.avail;   // how many can be ordered at each location (capped)
     }
     return true;
-  });
+  }));
 }
