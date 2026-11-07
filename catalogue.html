@@ -48,6 +48,8 @@
     .item { background: #fff; border: 1px solid #eadfca; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; break-inside: avoid; }
     .item__img { aspect-ratio: 4 / 5; overflow: hidden; position: relative; background: #ece4d4; }
     .item__img img { width: 100%; height: 100%; object-fit: cover; object-position: center 72%; }
+    /* Supplier catalogue photos of tall trees: show the whole tree rather than cropping the top */
+    .item__img img[src*="images/plant-"] { object-fit: contain; object-position: center; background: #fff; }
     .item__code { position: absolute; top: 2.5mm; left: 2.5mm; background: var(--green-800); color: #f6e7bd; font: 600 .66rem/1 var(--sans); letter-spacing: .1em; padding: .45em .7em; border-radius: 999px; }
     .item__xmas { position: absolute; top: 2.5mm; right: 2.5mm; background: var(--red); color: #fff; font-size: .62rem; padding: .4em .65em; border-radius: 999px; letter-spacing: .06em; }
     .item__body { padding: 3mm 3.5mm 3.5mm; display: flex; flex-direction: column; flex: 1; }
