@@ -32,6 +32,14 @@ const PRODUCTS = [
   { code: "YDP-017", img: "plant-ydp-017", name: "Ficus Branch (60 cm)", price: 60, cat: "plants", desc: "Leafy ficus branch for vases and arrangements. 60 cm long." },
   { code: "YDP-018", img: "plant-ydp-018", name: "Pink Yucca (120 cm)", price: 500, cat: "plants", desc: "Pink flowering yucca with long green leaves. 120 cm tall." },
   { code: "YDP-019", img: "plant-ydp-019", name: "Red Calathea Plant (170 cm)", price: 740, cat: "plants", desc: "Striking red-and-green calathea leaves. 170 cm tall." },
+  // Small artificial plants YDPSP-001 to 007 (90 cm), November 2026, 50 of each at the warehouse.
+  { code: "YDPSP-001", img: "plant-ydpsp-001", name: "Bird of Paradise Plant (90 cm)", price: 300, cat: "plants", desc: "Compact artificial bird of paradise with broad tropical leaves. 90 cm tall." },
+  { code: "YDPSP-002", img: "plant-ydpsp-002", name: "Areca Palm Plant (90 cm)", price: 300, cat: "plants", desc: "Feathery artificial areca palm in a black pot. 90 cm tall." },
+  { code: "YDPSP-003", img: "plant-ydpsp-003", name: "Peacock Calathea Plant (90 cm)", price: 300, cat: "plants", desc: "Patterned calathea leaves in deep and pale green. 90 cm tall." },
+  { code: "YDPSP-004", img: "plant-ydpsp-004", name: "Pink Caladium Plant (90 cm)", price: 300, cat: "plants", desc: "Bold pink-and-green caladium leaves in a white pot. 90 cm tall." },
+  { code: "YDPSP-005", img: "plant-ydpsp-005", name: "Green Alocasia Plant (90 cm)", price: 300, cat: "plants", desc: "Large heart-shaped alocasia leaves with pale veins. 90 cm tall." },
+  { code: "YDPSP-006", img: "plant-ydpsp-006", name: "Variegated Dieffenbachia Plant (90 cm)", price: 300, cat: "plants", desc: "Cream-and-green variegated dieffenbachia in a white pot. 90 cm tall." },
+  { code: "YDPSP-007", img: "plant-ydpsp-007", name: "White-Veined Caladium Plant (90 cm)", price: 300, cat: "plants", desc: "Green caladium leaves with crisp white veins. 90 cm tall." },
   // Yiadom Floral: floral stems (YFS) and potted flowers (YSPF), November 2026. These have their own codes.
   { code: "YFS-001", img: "floral-yfs-001", name: "Artificial Fern Stem", price: 25, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
   { code: "YFS-002", img: "floral-yfs-002", name: "Greenery Spray", price: 34, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
