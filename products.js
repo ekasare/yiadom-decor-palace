@@ -1,7 +1,7 @@
 /* ============================================================
    PRODUCT LIST — shared by the website (index.html) and the catalogue (catalogue.html)
    To add an item: put the photo in /images and add a line below.
-   cat: plants | pots | vases | fragrance | floral | potted | globes      xmas: true = also a "Christmas Pick"
+   cat: plants | pots | vases | fragrance | floral | potted | globes | nananom      xmas: true = also a "Christmas Pick"
    price: number in GH₵ (e.g. 450), or text for a range (e.g. "50–200"). Leave it out to show "Price on request".
    Item codes (YDP-001, YDP-002 ...) are given automatically in this order,
    so add new items at the END to keep existing codes the same.
@@ -204,9 +204,25 @@ const PRODUCTS = [
   { code: "YDP-G013", img: "globe-ydp-g013", name: "Ship Globe (20 cm)", price: 664, cat: "globes", desc: "20 cm globe with a ship design on a polished stand. Assorted. A stylish décor piece." },
   { code: "YDP-G014", img: "globe-ydp-g014", name: "Picture-Frame Stand Globe (20 cm)", price: 658, cat: "globes", desc: "20 cm globe set in a picture-frame-style stand. A modern décor and gift idea." },
   { code: "YDP-G015", img: "globe-ydp-g015", name: "Globe, Bread-Rack Stand (20 cm)", price: 360, cat: "globes", desc: "20 cm globe on a curved bread-rack-style stand. Assorted in 4 colours." },
+  // Nananom Agudie: decorative glass bowls on stands, November 2026 (12 of each at the warehouse). These have their own codes.
+  { code: "YDPR-001", img: "nananom-ydpr-001", name: "Nananom Agudie – Bird & Leaf Ring Bowl", price: 220, cat: "nananom", desc: "Lotus-cut glass bowl inside a gold ring frame with a bird and leaf detail. A graceful centrepiece for fruit or sweets." },
+  { code: "YDPR-002", img: "nananom-ydpr-002", name: "Nananom Agudie – Sunburst Stand Bowl", price: 200, cat: "nananom", desc: "Amber lotus glass bowl on a gold sunburst stand. Lovely for fruit, sweets or as a table centrepiece." },
+  { code: "YDPR-003", img: "nananom-ydpr-003", name: "Nananom Agudie – Crescent Arch Bowl, Clear", price: 220, cat: "nananom", desc: "Clear lotus glass bowl under a gold crescent arch, on a gold lattice base." },
+  { code: "YDPR-004", img: "nananom-ydpr-004", name: "Nananom Agudie – Double Bowl Stand", price: 250, cat: "nananom", desc: "Two amber lotus glass bowls on a gold wire stand. Serve fruit and sweets side by side." },
+  { code: "YDPR-005", img: "nananom-ydpr-005", name: "Nananom Agudie – Golden Rose Bowl", price: 180, cat: "nananom", desc: "Amber lotus glass bowl on a gold stand with rose detail." },
+  { code: "YDPR-006", img: "nananom-ydpr-006", name: "Nananom Agudie – Smoky Grey Rose Bowl", price: 180, cat: "nananom", desc: "Smoky grey glass bowl on a gold stand with rose detail. Elegant and modern." },
+  { code: "YDPR-007", img: "nananom-ydpr-007", name: "Nananom Agudie – Silver Bowl Cart", price: 250, cat: "nananom", desc: "Two smoky grey lotus bowls on a silver tricycle cart. A playful statement piece." },
+  { code: "YDPR-008", img: "nananom-ydpr-008", name: "Nananom Agudie – Triple Bowl Cart", price: 280, cat: "nananom", desc: "Three amber lotus bowls on a long gold cart with wheels. Perfect for parties and events." },
+  { code: "YDPR-009", img: "nananom-ydpr-009", name: "Nananom Agudie – Swirl Pedestal Dish", price: 200, cat: "nananom", desc: "Amber swirl glass dish on a shiny gold pedestal." },
+  { code: "YDPR-010", img: "nananom-ydpr-010", name: "Nananom Agudie – Grey Double Bowl Cart", price: 220, cat: "nananom", desc: "Two smoky grey glass bowls on a gold cart stand." },
+  { code: "YDPR-011", img: "nananom-ydpr-011", name: "Nananom Agudie – Leaf Handle Basket Bowl", price: 220, cat: "nananom", desc: "Smoky grey glass bowl in a tall gold basket frame with leaf detail." },
+  { code: "YDPR-012", img: "nananom-ydpr-012", name: "Nananom Agudie – Bicycle Bowl", price: 160, cat: "nananom", desc: "Amber lotus glass bowl on a gold bicycle stand. A charming gift." },
+  { code: "YDPR-013", img: "nananom-ydpr-013", name: "Nananom Agudie – Three-Bowl Tier Stand", price: 230, cat: "nananom", desc: "One large and two small lotus glass bowls on a gold tiered stand." },
+  { code: "YDPR-014", img: "nananom-ydpr-014", name: "Nananom Agudie – Crescent Arch Bowl, Amber", price: 220, cat: "nananom", desc: "Amber lotus glass bowl under a gold crescent arch, on a gold lattice base." },
+  { code: "YDPR-015", img: "nananom-ydpr-015", name: "Nananom Agudie – Scroll Triple Bowl Stand", price: 280, cat: "nananom", desc: "Three amber lotus glass bowls on a gold scroll stand." },
 ];
 
-const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance", floral: "Floral Stems", potted: "Potted Flowers", globes: "Globes" };
+const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance", floral: "Floral Stems", potted: "Potted Flowers", globes: "Globes", nananom: "Nananom Agudie" };
 // Items without their own code are numbered YDP-001, YDP-002 ... in list order.
 { let n = 0; PRODUCTS.forEach(p => { if (!p.code) p.code = "YDP-" + String(++n).padStart(3, "0"); }); }
 // Hidden items keep their place (and code) above, but are taken out of what the website shows.
