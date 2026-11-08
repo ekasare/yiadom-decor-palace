@@ -12,6 +12,26 @@
 const WHATSAPP = "233275957777";
 
 const PRODUCTS = [
+  // Artificial plants & trees, new codes YDP-001 to YDP-019 (November 2026), 24 of each at the warehouse.
+  { code: "YDP-001", img: "plant-ydp-001", name: "Variegated Ficus Tree (180 cm)", price: 750, cat: "plants", desc: "Cream-and-green variegated ficus leaves on natural-look trunks. 180 cm tall." },
+  { code: "YDP-002", img: "plant-ydp-002", name: "Croton Plant (150 cm)", price: 650, cat: "plants", desc: "Glossy croton leaves in green, yellow and red. 150 cm tall." },
+  { code: "YDP-003", img: "plant-ydp-003", name: "Autumn Maple Tree (120 cm)", price: 600, cat: "plants", desc: "Bright orange maple foliage that stays vivid all year. 120 cm tall." },
+  { code: "YDP-004", img: "plant-ydp-004", name: "Maple Tree (150 cm)", price: 650, cat: "plants", desc: "Full maple tree with rich deep-toned leaves. 150 cm tall." },
+  { code: "YDP-005", img: "plant-ydp-005", name: "Fiddle Leaf Fig Tree (190 cm)", price: 940, cat: "plants", desc: "Tall fiddle leaf fig with large glossy leaves. A statement for living rooms and offices. 190 cm tall." },
+  { code: "YDP-006", img: "plant-ydp-006", name: "Multicolored Croton (180 cm)", price: 800, cat: "plants", desc: "Tall croton in red, pink and green. 180 cm tall." },
+  { code: "YDP-007", img: "plant-ydp-007", name: "Snake Plant (90 cm)", price: 550, cat: "plants", desc: "Upright snake plant with yellow-edged leaves. 90 cm tall." },
+  { code: "YDP-008", img: "plant-ydp-008", name: "Olive Tree (200 cm)", price: 1600, cat: "plants", desc: "Graceful olive tree with slender silvery-green leaves. 200 cm tall." },
+  { code: "YDP-009", img: "plant-ydp-009", name: "Evergreen Cypress (150 cm)", price: 750, cat: "plants", desc: "Neat evergreen cypress for entrances, offices and Christmas. 150 cm tall." },
+  { code: "YDP-010", img: "plant-ydp-010", name: "Bird of Paradise (150 cm)", price: 750, cat: "plants", desc: "Tropical bird of paradise with broad banana-style leaves. 150 cm tall." },
+  { code: "YDP-011", img: "plant-ydp-011", name: "Bird of Paradise (145 cm)", price: 650, cat: "plants", desc: "Tropical bird of paradise with broad upright leaves. 145 cm tall." },
+  { code: "YDP-012", img: "plant-ydp-012", name: "Fiddle Leaf Fig Tree (150 cm)", price: 600, cat: "plants", desc: "Fiddle leaf fig with large glossy leaves. 150 cm tall." },
+  { code: "YDP-013", img: "plant-ydp-013", name: "Cherry Blossom Tree (200 cm)", price: 1600, cat: "plants", desc: "Romantic pink cherry blossom tree. Perfect for lounges and events. 200 cm tall." },
+  { code: "YDP-014", img: "plant-ydp-014", name: "Bamboo Tree (180 cm)", price: 800, cat: "plants", desc: "Fresh green bamboo with slender canes. 180 cm tall." },
+  { code: "YDP-015", img: "plant-ydp-015", name: "Boxwood Topiary Tree (95 cm)", price: 550, cat: "plants", desc: "Double-ball boxwood topiary. Smart for doorways and reception areas. 95 cm tall." },
+  { code: "YDP-016", img: "plant-ydp-016", name: "Snake Plant (150 cm)", price: 940, cat: "plants", desc: "Tall snake plant with yellow-edged leaves. 150 cm tall." },
+  { code: "YDP-017", img: "plant-ydp-017", name: "Ficus Branch (60 cm)", price: 60, cat: "plants", desc: "Leafy ficus branch for vases and arrangements. 60 cm long." },
+  { code: "YDP-018", img: "plant-ydp-018", name: "Pink Yucca (120 cm)", price: 500, cat: "plants", desc: "Pink flowering yucca with long green leaves. 120 cm tall." },
+  { code: "YDP-019", img: "plant-ydp-019", name: "Red Calathea Plant (170 cm)", price: 740, cat: "plants", desc: "Striking red-and-green calathea leaves. 170 cm tall." },
   // Yiadom Floral: floral stems (YFS) and potted flowers (YSPF), November 2026. These have their own codes.
   { code: "YFS-001", img: "floral-yfs-001", name: "Artificial Fern Stem", price: 25, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
   { code: "YFS-002", img: "floral-yfs-002", name: "Greenery Spray", price: 34, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
