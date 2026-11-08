@@ -68,7 +68,16 @@ function render() {
   moreBtn.style.display = shown >= visible.length ? "none" : "";
 }
 
+// Filters with no items (e.g. a range being recoded) are hidden, and come back when items are added.
+const has = f => f === "all" || PRODUCTS.some(p => f === "christmas" ? p.xmas : p.cat === f);
+function tidyChips() {
+  document.querySelectorAll(".chip").forEach(c => { c.hidden = !has(c.dataset.filter); });
+  document.querySelectorAll("[data-jump]").forEach(a => { a.hidden = !has(a.dataset.jump); });
+  if (!has(filter)) setFilter("all");
+}
+
 function setFilter(f) {
+  if (!has(f)) f = "all";
   filter = f; shown = PAGE;
   document.querySelectorAll(".chip").forEach(c => {
     const on = c.dataset.filter === f;
@@ -80,9 +89,9 @@ function setFilter(f) {
 $("#filters").addEventListener("click", (e) => { const c = e.target.closest(".chip"); if (c) setFilter(c.dataset.filter); });
 moreBtn.addEventListener("click", () => { shown += PAGE; render(); });
 document.querySelectorAll("[data-jump]").forEach(a => a.addEventListener("click", () => setFilter(a.dataset.jump)));
-render();
+tidyChips(); render();
 // Then refresh prices from the till and redraw if anything came back.
-loadLivePrices().then(ok => { if (ok) render(); });
+loadLivePrices().then(ok => { if (ok) { tidyChips(); render(); } });
 
 /* Lightbox */
 const lb = $("#lightbox");
