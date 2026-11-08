@@ -50,7 +50,7 @@
     .item__img img { width: 100%; height: 100%; object-fit: cover; object-position: center 72%; }
     /* Supplier catalogue photos of tall trees: show the whole tree rather than cropping the top */
     .item__img img[src*="images/plant-"] { object-fit: contain; object-position: center; background: #fff; }
-    .item__img img[src*="images/floral-"] { object-fit: contain; object-position: center; background: #d9d9d9; }
+    .item__img img[src*="images/floral-"], .item__img img[src*="images/globe-"] { object-fit: contain; object-position: center; background: #d9d9d9; }
     .item__code { position: absolute; top: 2.5mm; left: 2.5mm; background: var(--green-800); color: #f6e7bd; font: 600 .66rem/1 var(--sans); letter-spacing: .1em; padding: .45em .7em; border-radius: 999px; }
     .item__xmas { position: absolute; top: 2.5mm; right: 2.5mm; background: var(--red); color: #fff; font-size: .62rem; padding: .4em .65em; border-radius: 999px; letter-spacing: .06em; }
     .item__body { padding: 3mm 3.5mm 3.5mm; display: flex; flex-direction: column; flex: 1; }
@@ -146,7 +146,7 @@
   <script src="products.js"></script>
   <script>
     const PER_PAGE = 9;
-    const ORDER = ["plants", "pots", "vases", "fragrance", "floral", "potted"];
+    const ORDER = ["plants", "pots", "vases", "fragrance", "floral", "potted", "globes"];
     const SUB = {
       plants: "Lifelike greenery — no watering, no wilting",
       pots: "Designer pots for interior & exterior",
@@ -154,6 +154,7 @@
       fragrance: "Reed diffusers & aroma gift sets",
       floral: "Yiadom Floral — single stems for arrangements, priced per stem",
       potted: "Ready-made mini arrangements in decorative pots",
+      globes: "Desk and floor globes, some with built-in lights",
       christmas: "Festive favourites & gift ideas",
     };
     const wa = (p) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hello Yiadom Decor Palace! I'd like to order ${p.code} – ${p.name}${p.price != null ? ` (${formatPrice(p)})` : ""}. Is it available?`)}`;

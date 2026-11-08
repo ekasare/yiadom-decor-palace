@@ -1,7 +1,7 @@
 /* ============================================================
    PRODUCT LIST — shared by the website (index.html) and the catalogue (catalogue.html)
    To add an item: put the photo in /images and add a line below.
-   cat: plants | pots | vases | fragrance      xmas: true = also a "Christmas Pick"
+   cat: plants | pots | vases | fragrance | floral | potted | globes      xmas: true = also a "Christmas Pick"
    price: number in GH₵ (e.g. 450), or text for a range (e.g. "50–200"). Leave it out to show "Price on request".
    Item codes (YDP-001, YDP-002 ...) are given automatically in this order,
    so add new items at the END to keep existing codes the same.
@@ -188,9 +188,25 @@ const PRODUCTS = [
   { code: "YSPF-010", img: "floral-yspf-010", name: "Mixed Succulent Mini Pot", price: 120, cat: "potted", desc: "A cluster of lifelike succulents in a white pot." },
   { code: "YSPF-011", img: "floral-yspf-011", name: "Potted Wildflower & Lavender", price: 100, cat: "potted", desc: "Lavender and wildflowers in a woven-look pot." },
   { code: "YSPF-012", img: "floral-yspf-012", name: "Hanging Spider Plant", price: 100, cat: "potted", desc: "Trailing spider plant in a hanging pot, ready to hang." },
+  // Yiadom globes, November 2026 (12 of each received at the warehouse). These have their own codes.
+  { code: "YDP-G001", img: "globe-ydp-g001", name: "Classic Globe, Plated Finish (20 cm)", price: 350, cat: "globes", desc: "20 cm desk globe with English map text on a plated metal stand. Assorted in 4 colours." },
+  { code: "YDP-G002", img: "globe-ydp-g002", name: "Desk Globe, Plastic Base (20 cm)", price: 250, cat: "globes", desc: "20 cm globe on a sturdy plastic base. Assorted in 4 colours, a great gift for students." },
+  { code: "YDP-G003", img: "globe-ydp-g003", name: "Pink & Blue Globe, Plastic Base (20 cm)", price: 200, cat: "globes", desc: "20 cm globe in soft pink or blue on a plastic base. Lovely for children's rooms." },
+  { code: "YDP-G004", img: "globe-ydp-g004", name: "Mini Globe, Plated Finish (14 cm)", price: 180, cat: "globes", desc: "Compact 14 cm globe on a plated stand. Assorted beige and blue." },
+  { code: "YDP-G005", img: "globe-ydp-g005", name: "Swivel Globe, Black & Silver / Gold (20 cm)", price: 450, cat: "globes", desc: "20 cm universal swivel globe that turns in every direction. Black with silver or black with gold." },
+  { code: "YDP-G006", img: "globe-ydp-g006", name: "Mini Globe, Black & Silver / Gold (14 cm)", price: 255, cat: "globes", desc: "Compact 14 cm globe on a plated stand. Black with silver or black with gold." },
+  { code: "YDP-G007", img: "globe-ydp-g007", name: "Light-Up Globe, White (20 cm)", price: 260, cat: "globes", desc: "20 cm globe with a built-in light and white painted base. Blue and pink mix, a soft night light for bedrooms." },
+  { code: "YDP-G008", img: "globe-ydp-g008", name: "Antique Swivel Globe (20 cm)", price: 450, cat: "globes", desc: "20 cm universal swivel globe with an antique plated finish. Assorted." },
+  { code: "YDP-G009", img: "globe-ydp-g009", name: "Globe on Wooden Base (20 cm)", price: 430, cat: "globes", desc: "20 cm globe on a classic wooden base. Assorted in 4 colours, perfect for offices and studies." },
+  { code: "YDP-G010", img: "globe-ydp-g010", name: "Light-Up Globe, Ruler Frame (30 cm)", price: 500, cat: "globes", desc: "Large 30 cm globe with a built-in light on a metal ruler-style frame." },
+  { code: "YDP-G011", img: "globe-ydp-g011", name: "Large Swivel Globe (30 cm)", price: 580, cat: "globes", desc: "Large 30 cm universal swivel globe. A statement piece for offices, libraries and lounges." },
+  { code: "YDP-G012", img: "globe-ydp-g012", name: "Green Light-Up Globe (20 cm)", price: 664, cat: "globes", desc: "Elegant 20 cm deep-green globe with gold detail and a built-in light, on a gold stand." },
+  { code: "YDP-G013", img: "globe-ydp-g013", name: "Ship Globe (20 cm)", price: 664, cat: "globes", desc: "20 cm globe with a ship design on a polished stand. Assorted. A stylish décor piece." },
+  { code: "YDP-G014", img: "globe-ydp-g014", name: "Picture-Frame Stand Globe (20 cm)", price: 658, cat: "globes", desc: "20 cm globe set in a picture-frame-style stand. A modern décor and gift idea." },
+  { code: "YDP-G015", img: "globe-ydp-g015", name: "Globe, Bread-Rack Stand (20 cm)", price: 360, cat: "globes", desc: "20 cm globe on a curved bread-rack-style stand. Assorted in 4 colours." },
 ];
 
-const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance", floral: "Floral Stems", potted: "Potted Flowers" };
+const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance", floral: "Floral Stems", potted: "Potted Flowers", globes: "Globes" };
 // Items without their own code are numbered YDP-001, YDP-002 ... in list order.
 { let n = 0; PRODUCTS.forEach(p => { if (!p.code) p.code = "YDP-" + String(++n).padStart(3, "0"); }); }
 // Hidden items keep their place (and code) above, but are taken out of what the website shows.
