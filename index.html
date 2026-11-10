@@ -49,6 +49,7 @@
     <nav class="nav__links" id="navLinks" aria-label="Main">
       <a href="#opening">Grand Opening</a>
       <a href="#shop">Shop</a>
+      <a href="#showroom">3D Showroom</a>
       <a href="#spaces">Interior &amp; Exterior</a>
       <a href="#christmas">Christmas</a>
       <a href="catalogue.html">Catalogue</a>
@@ -135,6 +136,19 @@
     </section>
 
     <!-- SHOP -->
+    <!-- 3D SHOWROOM (showroom.js) -->
+    <section class="section showroom" id="showroom">
+      <div class="container showroom__wrap">
+        <div class="showroom__text reveal">
+          <p class="eyebrow eyebrow--gold">New · 3D Showroom</p>
+          <h2>Walk through our <em>Grand Opening</em> picks</h2>
+          <p>Step inside a 3D gallery of our favourite pieces for opening day: trees, glass vases, orchids and globes. Turn around, tap any piece to see its price, and add it to your order.</p>
+          <a href="#showroom" class="btn btn--gold" data-showroom>Enter the 3D showroom</a>
+          <p class="showroom__note">Works on phones and computers. Drag or swipe to look around.</p>
+        </div>
+        <a href="#showroom" class="showroom__preview reveal" id="showroomPreview" data-showroom aria-label="Enter the 3D showroom"></a>
+      </div>
+    </section>
     <section class="section shop" id="shop">
       <div class="container">
         <div class="section__head reveal">
@@ -332,5 +346,6 @@
   <script src="script.js"></script>
   <script src="order.js"></script>
   <script src="chat.js"></script>
+  <script src="showroom.js"></script>
 </body>
 </html>
