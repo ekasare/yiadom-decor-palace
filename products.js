@@ -40,6 +40,8 @@ const PRODUCTS = [
   { code: "YDPSP-005", img: "plant-ydpsp-005", name: "Green Alocasia Plant (90 cm)", price: 300, cat: "plants", desc: "Large heart-shaped alocasia leaves with pale veins. 90 cm tall." },
   { code: "YDPSP-006", img: "plant-ydpsp-006", name: "Variegated Dieffenbachia Plant (90 cm)", price: 300, cat: "plants", desc: "Cream-and-green variegated dieffenbachia in a white pot. 90 cm tall." },
   { code: "YDPSP-007", img: "plant-ydpsp-007", name: "White-Veined Caladium Plant (90 cm)", price: 300, cat: "plants", desc: "Green caladium leaves with crisp white veins. 90 cm tall." },
+  { code: "YDPSP-008", img: "plant-ydpsp-008", name: "Rubber Plant (90 cm)", price: 300, cat: "plants", desc: "Glossy deep-green rubber plant leaves on a slim stem, in a white pot. 90 cm tall." },
+  { code: "YDPSP-009", img: "plant-ydpsp-009", name: "Variegated Foliage Plant, Green & White (90 cm)", price: 300, cat: "plants", desc: "Round green leaves with bold white edges and veins, in a white pot. 90 cm tall." },
   // Artificial plants YDP-020 to YDP-046 (supplier codes; were YDP-079 to 105), 20 of each at the warehouse. Hidden = not delivered.
   { code: "YDP-020", img: "plant-japanese-red-maple-180-v2", name: "Japanese Red Maple Tree (180 cm)", price: 750, cat: "plants", desc: "Deep red Japanese maple leaves on a natural-look trunk. 180 cm tall — a rich splash of colour for lounges, lobbies and entrances." },
   { code: "YDP-021", img: "plant-pink-hydrangea-120-v2", name: "Pink Hydrangea Flowering Tree (120 cm)", price: 650, cat: "plants", desc: "Full pink hydrangea blooms with fresh green leaves. 120 cm tall — soft and romantic for bedrooms, salons and event décor." },
