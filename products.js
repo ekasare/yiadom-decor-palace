@@ -122,6 +122,8 @@ const PRODUCTS = [
   { code: "YFS-051", img: "floral-yfs-051", name: "Magnolia Flower Stem", price: 50, unit: "stem", cat: "floral", desc: "Artificial flower stem for vases, bouquets, tables and event décor. Assorted colours." },
   { code: "YFS-052", img: "floral-yfs-052", name: "Decorative Fern Foliage", price: 18, unit: "stem", cat: "floral", desc: "Lifelike artificial greenery for vases, arrangements and centrepieces. Mix a few stems for a fuller look." },
   { code: "YFS-053", img: "floral-yfs-053", name: "Cascading Yellow-Green Foliage", price: 18, unit: "stem", cat: "floral", desc: "Trailing artificial greenery to drape from shelves, walls, arches, planters and event backdrops." },
+  { code: "YFS-063", img: "floral-yfs-063", name: "Red Rose Stem with Bud", price: 18, unit: "stem", cat: "floral", desc: "Single artificial red rose with a bud and leaves. Lovely in a bud vase, a bouquet or scattered across event tables." },
+  { code: "YFS-064", img: "floral-yfs-064", name: "Dried Flower Bunch", price: 40, unit: "bunch", cat: "floral", desc: "Natural-look dried flower bunch for rustic vases and arrangements. Yellow, orange or deep red." },
   { code: "YSPF-001", img: "floral-yspf-001", name: "Potted Moth Orchid, 2 Stems", price: 90, cat: "potted", desc: "Elegant two-stem moth orchids (phalaenopsis) in a neat pot. Assorted colours." },
   { code: "YSPF-002", img: "floral-yspf-002", name: "Calla Lily Style Potted Flower", price: 80, cat: "potted", desc: "Glossy blooms in a small white pot. Assorted colours." },
   { code: "YSPF-003", img: "floral-yspf-003", name: "Autumn Mini Potted Flower", price: 90, cat: "potted", desc: "Warm autumn-toned flowers in a mini pot." },
