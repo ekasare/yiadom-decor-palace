@@ -231,4 +231,10 @@
     }
     wire();
   }
+  // Lets the "Ask Yiadom" chat (chat.js) add suggested items to the basket.
+  window.YDPOrder = {
+    canAdd: code => !!ORDERING.on && !!canOrder(byCode(code)),
+    add: (code, qty = 1) => { if (!ORDERING.on || !canOrder(byCode(code))) return false; add(code, qty); return true; },
+    open: () => open(),
+  };
 })();

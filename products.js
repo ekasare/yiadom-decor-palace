@@ -273,6 +273,7 @@ const priceHTML = (p) =>
    ------------------------------------------------------------ */
 const TILL_FEED = "https://till.yiadomdecorpalace.com/api/public/products";
 let ORDERING = { on: false };   // online ordering settings from the till (order.js uses them)
+let CHAT_ON = false;            // "Ask Yiadom" chat switched on in the till (chat.js uses it)
 let LIVE_PRICES = null;
 function loadLivePrices(timeoutMs = 3500) {
   if (LIVE_PRICES) return LIVE_PRICES;   // fetched once per page, shared by the shop and the basket
@@ -280,6 +281,7 @@ function loadLivePrices(timeoutMs = 3500) {
   return (LIVE_PRICES = Promise.race([feed, new Promise(r => setTimeout(() => r(null), timeoutMs))]).then(f => {
     if (!f || !Array.isArray(f.products)) return false;
     ORDERING = f.ordering || { on: false };
+    CHAT_ON = f.chat === true;
     const live = new Map(f.products.map(t => [t.code, t]));
     for (let i = PRODUCTS.length - 1; i >= 0; i--) {
       const p = PRODUCTS[i], t = live.get(p.code);
