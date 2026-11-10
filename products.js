@@ -250,7 +250,7 @@ const PRODUCTS = [
 
 const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance", floral: "Floral Stems", potted: "Potted Flowers", globes: "Globes", nananom: "Nananom Agudie" };
 // Any item still without a code gets the next free YDP number.
-{ let n = Math.max(0, ...PRODUCTS.map(p => /^YDP-(d+)$/.exec(p.code || "")).filter(Boolean).map(m => +m[1])); PRODUCTS.forEach(p => { if (!p.code) p.code = "YDP-" + String(++n).padStart(3, "0"); }); }
+{ let n = Math.max(0, ...PRODUCTS.map(p => /^YDP-([0-9]+)$/.exec(p.code || "")).filter(Boolean).map(m => +m[1])); PRODUCTS.forEach(p => { if (!p.code) p.code = "YDP-" + String(++n).padStart(3, "0"); }); }
 // Hidden items keep their place (and code) above, but are taken out of what the website shows.
 for (let i = PRODUCTS.length - 1; i >= 0; i--) if (PRODUCTS[i].hidden) PRODUCTS.splice(i, 1);
 
