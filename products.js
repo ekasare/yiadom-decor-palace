@@ -246,9 +246,17 @@ const PRODUCTS = [
   { code: "YDGV-013B", img: "ydgv-013", name: "Lilac Confetti Glass Vase, Tall", price: 450, cat: "vases", desc: "Lilac glass with colourful confetti splashes in green, blue and black. 19.5 × 38 cm." },
   { code: "YDGV-013C", img: "ydgv-013", name: "Lilac Confetti Glass Vase, Medium", price: 350, cat: "vases", desc: "Lilac glass with colourful confetti splashes in green, blue and black. 19.5 × 28 cm." },
   { code: "YDGV-014", img: "ydgv-014", name: "Brown & White Swirl Glass Vase", price: 650, cat: "vases", desc: "Tall glass vase with bold brown and white swirls. 19.5 × 44 cm." },
+  // Yiadom Decor Palace LED Wall Frames (YDWF), November 2026, at Buokrom.
+  { code: "YDWF-L001", img: "ydwf-l001", name: "Golden Portrait LED Frame", price: 650, cat: "wall-frames", desc: "LED wall frame: a striking portrait print traced with a glowing light line. A statement piece for living rooms, hallways, salons and boutiques." },
+  { code: "YDWF-L002", img: "ydwf-l002", name: "Red Lips Beauty LED Frame", price: 650, cat: "wall-frames", desc: "LED wall frame: a striking portrait print traced with a glowing light line. A statement piece for living rooms, hallways, salons and boutiques." },
+  { code: "YDWF-L003", img: "ydwf-l003", name: "Elegant Lady LED Frame", price: 650, cat: "wall-frames", desc: "LED wall frame: a striking portrait print traced with a glowing light line. A statement piece for living rooms, hallways, salons and boutiques." },
+  { code: "YDWF-L004", img: "ydwf-l004", name: "Black Hat Lady LED Frame", price: 650, cat: "wall-frames", desc: "LED wall frame: a striking portrait print traced with a glowing light line. A statement piece for living rooms, hallways, salons and boutiques." },
+  { code: "YDWF-L005", img: "ydwf-l005", name: "Side Profile LED Frame", price: 650, cat: "wall-frames", desc: "LED wall frame: a striking portrait print traced with a glowing light line. A statement piece for living rooms, hallways, salons and boutiques." },
+  { code: "YDWF-L006", img: "ydwf-l006", name: "Royal Black Hat LED Frame", price: 650, cat: "wall-frames", desc: "LED wall frame: a striking portrait print traced with a glowing light line. A statement piece for living rooms, hallways, salons and boutiques." },
+  { code: "YDWF-L007", img: "ydwf-l007", name: "Red Hat Bubblegum LED Frame", price: 650, cat: "wall-frames", desc: "LED wall frame: a striking portrait print traced with a glowing light line. A statement piece for living rooms, hallways, salons and boutiques." },
 ];
 
-const CAT_LABEL = { plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance", floral: "Floral Stems", potted: "Potted Flowers", globes: "Globes", nananom: "Nananom Agudie" };
+const CAT_LABEL = { "wall-frames": "Wall Frames", plants: "Plants & Trees", pots: "Pots & Planters", vases: "Vases", fragrance: "Home Fragrance", floral: "Floral Stems", potted: "Potted Flowers", globes: "Globes", nananom: "Nananom Agudie" };
 // Any item still without a code gets the next free YDP number.
 { let n = Math.max(0, ...PRODUCTS.map(p => /^YDP-([0-9]+)$/.exec(p.code || "")).filter(Boolean).map(m => +m[1])); PRODUCTS.forEach(p => { if (!p.code) p.code = "YDP-" + String(++n).padStart(3, "0"); }); }
 // Hidden items keep their place (and code) above, but are taken out of what the website shows.
