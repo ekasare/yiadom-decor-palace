@@ -273,7 +273,10 @@ const priceHTML = (p) =>
    ------------------------------------------------------------ */
 const TILL_FEED = "https://till.yiadomdecorpalace.com/api/public/products";
 let ORDERING = { on: false };   // online ordering settings from the till (order.js uses them)
-let CHAT_ON = false;            // "Ask Yiadom" chat switched on in the till (chat.js uses it)
+let CHAT_ON = false;
+// Photo for a product: one uploaded in the till (p.photo), else the website's own picture, else a plain placeholder.
+const PHOTO_PLACEHOLDER = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400"><rect width="300" height="400" fill="#f3ecdf"/><g transform="translate(118 170) scale(1.4)" fill="#d4af5f"><path d="M10 30 32 12l22 18" fill="none" stroke="#d4af5f" stroke-width="3.2" stroke-linejoin="round"/><path d="M32 48c-8-3-11-11-7-18 6 2 8 10 7 18Z"/><path d="M32 48c8-3 11-11 7-18-6 2-8 10-7 18Z"/><path d="M32 47c-4-7-3-15 0-20 3 5 4 13 0 20Z"/></g></svg>');
+const imgSrc = p => p.photo || (p.img ? "images/" + p.img + ".jpg" : PHOTO_PLACEHOLDER);            // "Ask Yiadom" chat switched on in the till (chat.js uses it)
 let LIVE_PRICES = null;
 function loadLivePrices(timeoutMs = 3500) {
   if (LIVE_PRICES) return LIVE_PRICES;   // fetched once per page, shared by the shop and the basket
@@ -291,6 +294,19 @@ function loadLivePrices(timeoutMs = 3500) {
       if (typeof t.salePrice === "number") p.salePrice = t.salePrice; else delete p.salePrice;
       p.soldOut = f.showStock && t.inStock === false;
       if (t.avail) p.avail = t.avail;   // how many can be ordered at each location (capped)
+      if (t.photo) p.photo = t.photo;   // a newer photo uploaded in the till
+    }
+    // Products added in the till with "Show on the website" ticked, which aren't in the list above.
+    const have = new Set(PRODUCTS.map(p => p.code));
+    for (const t of f.products) {
+      if (!t.web || t.active === false || have.has(t.code) || typeof t.price !== "number") continue;
+      const p = { code: t.code, name: t.web.name, cat: t.web.cat, price: t.price, desc: t.web.desc || "", fromTill: true };
+      if (t.web.unit) p.unit = t.web.unit;
+      if (t.photo) p.photo = t.photo;
+      if (typeof t.salePrice === "number") p.salePrice = t.salePrice;
+      p.soldOut = f.showStock && t.inStock === false;
+      if (t.avail) p.avail = t.avail;
+      PRODUCTS.push(p);
     }
     return true;
   }));

@@ -69,7 +69,7 @@
     const price = typeof p.salePrice === "number" ? `<s>${ghs(p.price)}</s> ${ghs(p.salePrice)}` : typeof p.price === "number" ? ghs(p.price) : esc(p.price || "");
     const canAdd = window.YDPOrder && window.YDPOrder.canAdd(code);
     const wa = `https://wa.me/233275957777?text=${encodeURIComponent(`Hello! I'm interested in ${p.name} (${p.code}).`)}`;
-    return `<div class="chat__card"><img src="images/${esc(p.img)}.jpg" alt="" loading="lazy">
+    return `<div class="chat__card"><img src="${esc(imgSrc(p))}" alt="" loading="lazy">
       <div><span class="chat__code">${esc(p.code)}</span><b>${esc(p.name)}</b><span class="chat__price">${price}${p.unit ? " / " + esc(p.unit) : ""}</span>
       ${canAdd ? `<button type="button" class="chat__add" data-add="${esc(p.code)}">Add to order</button>` : `<a class="chat__add chat__add--wa" href="${wa}" target="_blank" rel="noopener">Ask on WhatsApp</a>`}</div></div>`;
   }

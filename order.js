@@ -113,7 +113,7 @@
     const later = place === "delivery" ? "on delivery" : "when you collect";
     panel.innerHTML = `
       <ul class="basket__lines">${basket.map(l => { const p = byCode(l.code); if (!p) return ""; const bad = short.find(x => x.code === l.code);
-        return `<li><img src="images/${esc(p.img)}.jpg" alt=""><div><b>${esc(p.name)}</b><span>${p.code} · ${typeof p.salePrice === "number" ? `<s>${ghs(p.price)}</s> ` : ""}${ghs(priceOf(p))}${p.unit ? " / " + esc(p.unit) : ""}</span>
+        return `<li><img src="${esc(imgSrc(p))}" alt=""><div><b>${esc(p.name)}</b><span>${p.code} · ${typeof p.salePrice === "number" ? `<s>${ghs(p.price)}</s> ` : ""}${ghs(priceOf(p))}${p.unit ? " / " + esc(p.unit) : ""}</span>
           ${bad ? `<em>${bad.have ? `Only ${bad.have} available for ${esc(placeName())}` : `Not available for ${esc(placeName())}`}${where(p).length ? " · available for " + esc(where(p).map(w => w === "delivery" ? "delivery" : "pickup at " + w).join(", ")) : ""}</em>` : ""}</div>
           <div class="qty-pick small"><button type="button" data-dec="${esc(l.code)}" aria-label="One less">−</button><span>${l.qty}</span><button type="button" data-inc="${esc(l.code)}" aria-label="One more">+</button></div>
           <strong>${ghs(priceOf(p) * l.qty)}</strong></li>`; }).join("")}</ul>

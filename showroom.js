@@ -14,13 +14,13 @@ const SHOWROOM_PICKS = ["YDP-013", "YDGV-001A", "YBPF-004", "YDP-005", "YDGV-010
   const ghs = n => "GH₵ " + Number(n).toLocaleString("en-GH", { maximumFractionDigits: 2 });
   const byCode = c => (typeof PRODUCTS !== "undefined" ? PRODUCTS : []).find(p => p.code === c);
   const priceText = p => typeof p.salePrice === "number" ? `<s>${ghs(p.price)}</s> ${ghs(p.salePrice)}` : typeof p.price === "number" ? ghs(p.price) : esc(p.price || "");
-  const picks = () => SHOWROOM_PICKS.map(byCode).filter(p => p && !p.soldOut && p.img);
+  const picks = () => SHOWROOM_PICKS.map(byCode).filter(p => p && !p.soldOut && (p.img || p.photo));
   let items = [], view = null, engine = null, current = 0;
 
   // ---------- the section on the page ----------
   function preview() {
     const box = el("#showroomPreview"); if (!box) return;
-    box.innerHTML = picks().slice(0, 5).map(p => `<img src="images/${esc(p.img)}.jpg" alt="${esc(p.name)}" loading="lazy">`).join("");
+    box.innerHTML = picks().slice(0, 5).map(p => `<img src="${esc(imgSrc(p))}" alt="${esc(p.name)}" loading="lazy">`).join("");
   }
   const ready = typeof loadLivePrices === "function" ? loadLivePrices() : Promise.resolve();
   ready.then(preview);
@@ -93,7 +93,7 @@ const SHOWROOM_PICKS = ["YDP-013", "YDGV-001A", "YBPF-004", "YDP-005", "YDGV-010
     const canAdd = window.YDPOrder && window.YDPOrder.canAdd(p.code);
     const wa = `https://wa.me/233275957777?text=${encodeURIComponent(`Hello! I saw ${p.name} (${p.code}) in your 3D showroom.`)}`;
     c.innerHTML = `<button class="sv__cx" type="button" data-hide aria-label="Close">×</button>
-      <img src="images/${esc(p.img)}.jpg" alt="">
+      <img src="${esc(imgSrc(p))}" alt="">
       <div><span class="sv__code">${esc(p.code)}</span><h3>${esc(p.name)}</h3><p class="sv__price">${priceText(p)}${p.unit ? " / " + esc(p.unit) : ""}</p>
       ${p.desc ? `<p class="sv__desc">${esc(p.desc)}</p>` : ""}
       <div class="sv__acts">${canAdd ? `<button type="button" class="btn btn--gold" data-add="${esc(p.code)}">Add to order</button>` : ""}
@@ -114,7 +114,7 @@ const SHOWROOM_PICKS = ["YDP-013", "YDGV-001A", "YBPF-004", "YDP-005", "YDGV-010
   }
   function fallbackGrid() {
     el("#svLoading").hidden = true; el("#svHint").hidden = true; view.querySelector(".sv__nav").hidden = true;
-    el("#svStage").innerHTML = `<div class="sv__grid">${items.map((p, i) => `<button type="button" data-i="${i}"><img src="images/${esc(p.img)}.jpg" alt=""><b>${esc(p.name)}</b><span>${priceText(p)}</span></button>`).join("")}</div>`;
+    el("#svStage").innerHTML = `<div class="sv__grid">${items.map((p, i) => `<button type="button" data-i="${i}"><img src="${esc(imgSrc(p))}" alt=""><b>${esc(p.name)}</b><span>${priceText(p)}</span></button>`).join("")}</div>`;
     el("#svStage").addEventListener("click", e => { const b = e.target.closest("[data-i]"); if (b) { current = +b.dataset.i; showCard(current); } });
   }
 
@@ -198,7 +198,7 @@ const SHOWROOM_PICKS = ["YDP-013", "YDGV-001A", "YBPF-004", "YDP-005", "YDGV-010
       const cap = new THREE.Mesh(new THREE.BoxGeometry(1.06, 0.05, 1.06), GOLD); cap.position.y = 0.825; grp.add(cap);
       const pl = new THREE.Mesh(new THREE.PlaneGeometry(0.88, 0.3), new THREE.MeshBasicMaterial({ map: plaque(p) }));
       pl.position.set(0, 0.46, 0.505); grp.add(pl);
-      loader.load(`images/${p.img}.jpg`, tex => {
+      loader.setCrossOrigin("anonymous"); loader.load(imgSrc(p), tex => {
         tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
         const asp = tex.image.width / tex.image.height, h = 1.75, w = h * asp;
         const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.08, h + 0.08, 0.04), GOLD); frame.position.set(0, 0.86 + h / 2 + 0.06, -0.02); grp.add(frame);

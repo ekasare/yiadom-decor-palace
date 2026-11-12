@@ -58,7 +58,7 @@ function render() {
   grid.innerHTML = visible.slice(0, shown).map((p, i) => `
     <button class="card" data-i="${i}" style="animation-delay:${(i % PAGE) * 40}ms">
       <div class="card__img">
-        <img src="images/${p.img}.jpg" alt="${p.name}" loading="lazy">
+        <img src="${imgSrc(p)}" alt="${p.name}" loading="lazy">
         <span class="card__tag">${CAT_LABEL[p.cat]}</span>
         ${p.xmas && filter !== "christmas" ? '<span class="card__tag card__tag--xmas">🎄 Xmas</span>' : ""}
         ${p.soldOut ? '<span class="card__tag card__tag--status card__tag--out">Sold out</span>' : p.salePrice ? '<span class="card__tag card__tag--status card__tag--sale">Sale</span>' : ""}
@@ -99,7 +99,7 @@ let current = 0;
 function openLb(i) {
   current = (i + visible.length) % visible.length;
   const p = visible[current];
-  $("#lbImg").src = `images/${p.img}.jpg`;
+  $("#lbImg").src = imgSrc(p);
   $("#lbImg").alt = p.name;
   $("#lbCat").textContent = `${p.code} · ${CAT_LABEL[p.cat]}` + (p.xmas ? " · Christmas Pick" : "");
   $("#lbTitle").textContent = p.name;
