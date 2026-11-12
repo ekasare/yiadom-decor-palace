@@ -146,7 +146,8 @@
   <script src="products.js"></script>
   <script>
     const PER_PAGE = 9;
-    const ORDER = ["plants", "vases", "floral", "potted", "globes", "nananom"];
+    // Sections follow the till's category list (Setup → Product categories); empty categories are skipped.
+    let ORDER = [];
     const SUB = {
       plants: "Lifelike greenery — no watering, no wilting",
       pots: "Designer pots for interior & exterior",
@@ -156,6 +157,8 @@
       potted: "Ready-made mini arrangements in decorative pots",
       globes: "Desk and floor globes, some with built-in lights",
       nananom: "Nananom Agudie — glass fruit and sweet bowls on decorative stands",
+      "wall-frames": "LED wall frames and statement art for living rooms, hallways and salons",
+      other: "More pieces for your home and business",
       christmas: "Festive favourites & gift ideas",
     };
     const wa = (p) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hello Yiadom Decor Palace! I'd like to order ${p.code} – ${p.name}${p.price != null ? ` (${formatPrice(p)})` : ""}. Is it available?`)}`;
@@ -167,13 +170,13 @@
     const item = (p) => `
       <article class="item">
         <div class="item__img">
-          <img src="images/${p.img}.jpg" alt="${esc(p.name)}">
+          <img src="${imgSrc(p)}" alt="${esc(p.name)}">
           <span class="item__code">${p.code}</span>
           ${p.xmas ? '<span class="item__xmas">🎄 Xmas</span>' : ""}
         </div>
         <div class="item__body">
           <h3>${esc(p.name)}</h3>
-          <p>${esc(p.desc)}</p>
+          <p>${esc(p.desc || "")}</p>
           <div class="item__price"><span class="${p.price == null ? "" : "has-price"}" data-price="${p.code}">${priceHTML(p)}</span><a href="${wa(p)}" target="_blank" rel="noopener">Order ›</a></div>
         </div>
       </article>`;
@@ -185,7 +188,7 @@
         html += `
           <section class="page ${extraClass}" ${first ? `id="${id}"` : ""}>
             <div class="page__inner">
-              <div class="page__head"><h2>${title}</h2><p>${SUB[id]}${list.length > PER_PAGE ? ` · ${i / PER_PAGE + 1}/${Math.ceil(list.length / PER_PAGE)}` : ""}</p></div>
+              <div class="page__head"><h2>${title}</h2><p>${SUB[id] || ""}${list.length > PER_PAGE ? ` · ${i / PER_PAGE + 1}/${Math.ceil(list.length / PER_PAGE)}` : ""}</p></div>
               ${first && intro ? `<p class="intro">${intro}</p>` : ""}
               <div class="items">${list.slice(i, i + PER_PAGE).map(item).join("")}</div>
             </div>
@@ -220,11 +223,16 @@
         ${foot()}
       </section>`;
 
-    const xmasList = PRODUCTS.filter((p) => p.xmas).slice(0, PER_PAGE);
+    // Wait for the till (prices, sold-out items, its category list and products added in the till), then build the pages.
+    // If the till can't be reached within a few seconds, the catalogue is built from the website's own list.
+    loadLivePrices().then(() => {
+    const cats = Array.isArray(CATEGORY_ORDER) ? CATEGORY_ORDER : Object.keys(CAT_LABEL);
+    ORDER = [...cats, ...[...new Set(PRODUCTS.map(p => p.cat))].filter(c => !cats.includes(c))].filter(c => PRODUCTS.some(p => p.cat === c && !p.soldOut));
+    const xmasList = PRODUCTS.filter((p) => p.xmas && !p.soldOut).slice(0, PER_PAGE);
     let html = cover;
     html += section("christmas", "Christmas <em>Picks</em>", xmasList, "xmas-page",
       "Our favourite pieces to dress your home, church or office for the festive season — and beautiful gifts for the people you love. Ask us about bulk and corporate gift orders.");
-    ORDER.forEach((cat) => html += section(cat, CAT_LABEL[cat].replace("&", "<em>&amp;</em>"), PRODUCTS.filter((p) => p.cat === cat)));
+    ORDER.forEach((cat) => html += section(cat, esc(CAT_LABEL[cat] || cat).replace("&amp;", "<em>&amp;</em>"), PRODUCTS.filter((p) => p.cat === cat && !p.soldOut)));
 
     html += `
       <section class="page order" id="order">
@@ -250,18 +258,11 @@
       </section>`;
 
     document.getElementById("pages").innerHTML = html;
-    // Live prices from the till: update each item in place (pages stay the same for printing).
-    loadLivePrices().then(ok => {
-      if (!ok) return;
-      document.querySelectorAll("[data-price]").forEach(el => {
-        const p = PRODUCTS.find(x => x.code === el.dataset.price), card = el.closest(".item");
-        if (!p) { if (card) card.style.visibility = "hidden"; return; }
-        el.innerHTML = priceHTML(p) + (p.soldOut ? " · Sold out" : "");
-      });
-    });
     document.getElementById("jump").innerHTML =
-      [["cover", "Cover"], ["christmas", "🎄 Christmas"], ...ORDER.map((c) => [c, CAT_LABEL[c]]), ["order", "How to order"]]
+      [["cover", "Cover"], ...(xmasList.length ? [["christmas", "🎄 Christmas"]] : []), ...ORDER.map((c) => [c, esc(CAT_LABEL[c] || c)]), ["order", "How to order"]]
         .map(([id, l]) => `<a href="#${id}">${l}</a>`).join("");
+    document.body.dataset.ready = "1";   // lets the PDF maker know the pages are built
+    });
   </script>
 </body>
 </html>
