@@ -59,7 +59,7 @@ function render() {
     <button class="card" data-i="${i}" style="animation-delay:${(i % PAGE) * 40}ms">
       <div class="card__img">
         <img src="${imgSrc(p)}" alt="${p.name}" loading="lazy">
-        <span class="card__tag">${CAT_LABEL[p.cat]}</span>
+        <span class="card__tag">${CAT_LABEL[p.cat] || ""}</span>
         ${p.xmas && filter !== "christmas" ? '<span class="card__tag card__tag--xmas">🎄 Xmas</span>' : ""}
         ${p.soldOut ? '<span class="card__tag card__tag--status card__tag--out">Sold out</span>' : p.salePrice ? '<span class="card__tag card__tag--status card__tag--sale">Sale</span>' : ""}
       </div>
@@ -70,6 +70,18 @@ function render() {
 
 // Filters with no items (e.g. a range being recoded) are hidden, and come back when items are added.
 const has = f => f === "all" || PRODUCTS.some(p => f === "christmas" ? p.xmas : p.cat === f);
+// Filter buttons follow the till's category list: new categories get a button, renamed ones a new label,
+// all in the till's order (Christmas Picks stays last). Empty categories are then hidden by tidyChips().
+function syncChips() {
+  if (!Array.isArray(CATEGORY_ORDER)) return;
+  const box = $("#filters"), xmas = box.querySelector('.chip[data-filter="christmas"]');
+  for (const id of CATEGORY_ORDER) {
+    let c = [...box.querySelectorAll(".chip")].find(x => x.dataset.filter === id);
+    if (!c) { c = document.createElement("button"); c.className = "chip"; c.dataset.filter = id; c.setAttribute("role", "tab"); c.setAttribute("aria-selected", "false"); }
+    c.textContent = CAT_LABEL[id] || id;
+    box.insertBefore(c, xmas);
+  }
+}
 function tidyChips() {
   document.querySelectorAll(".chip").forEach(c => { c.hidden = !has(c.dataset.filter); });
   document.querySelectorAll("[data-jump]").forEach(a => { a.hidden = !has(a.dataset.jump); });
@@ -91,7 +103,7 @@ moreBtn.addEventListener("click", () => { shown += PAGE; render(); });
 document.querySelectorAll("[data-jump]").forEach(a => a.addEventListener("click", () => setFilter(a.dataset.jump)));
 tidyChips(); render();
 // Then refresh prices from the till and redraw if anything came back.
-loadLivePrices().then(ok => { if (ok) { tidyChips(); render(); } });
+loadLivePrices().then(ok => { if (ok) { syncChips(); tidyChips(); render(); } });
 
 /* Lightbox */
 const lb = $("#lightbox");
@@ -101,7 +113,7 @@ function openLb(i) {
   const p = visible[current];
   $("#lbImg").src = imgSrc(p);
   $("#lbImg").alt = p.name;
-  $("#lbCat").textContent = `${p.code} · ${CAT_LABEL[p.cat]}` + (p.xmas ? " · Christmas Pick" : "");
+  $("#lbCat").textContent = `${p.code}${CAT_LABEL[p.cat] ? " · " + CAT_LABEL[p.cat] : ""}` + (p.xmas ? " · Christmas Pick" : "");
   $("#lbTitle").textContent = p.name;
   $("#lbDesc").textContent = p.desc;
   $("#lbPrice").innerHTML = priceHTML(p) + (p.soldOut ? " · Sold out" : "");

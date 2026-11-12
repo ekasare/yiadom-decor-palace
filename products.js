@@ -274,6 +274,7 @@ const priceHTML = (p) =>
 const TILL_FEED = "https://till.yiadomdecorpalace.com/api/public/products";
 let ORDERING = { on: false };   // online ordering settings from the till (order.js uses them)
 let CHAT_ON = false;
+let CATEGORY_ORDER = null;      // category ids in the till's order (Setup → Product categories), once the till answers
 // Photo for a product: one uploaded in the till (p.photo), else the website's own picture, else a plain placeholder.
 const PHOTO_PLACEHOLDER = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400"><rect width="300" height="400" fill="#f3ecdf"/><g transform="translate(118 170) scale(1.4)" fill="#d4af5f"><path d="M10 30 32 12l22 18" fill="none" stroke="#d4af5f" stroke-width="3.2" stroke-linejoin="round"/><path d="M32 48c-8-3-11-11-7-18 6 2 8 10 7 18Z"/><path d="M32 48c8-3 11-11 7-18-6 2-8 10-7 18Z"/><path d="M32 47c-4-7-3-15 0-20 3 5 4 13 0 20Z"/></g></svg>');
 const imgSrc = p => p.photo || (p.img ? "images/" + p.img + ".jpg" : PHOTO_PLACEHOLDER);            // "Ask Yiadom" chat switched on in the till (chat.js uses it)
@@ -285,6 +286,7 @@ function loadLivePrices(timeoutMs = 3500) {
     if (!f || !Array.isArray(f.products)) return false;
     ORDERING = f.ordering || { on: false };
     CHAT_ON = f.chat === true;
+    if (Array.isArray(f.categories)) { CATEGORY_ORDER = f.categories.map(c => c.id); f.categories.forEach(c => { CAT_LABEL[c.id] = c.name; }); }
     const live = new Map(f.products.map(t => [t.code, t]));
     for (let i = PRODUCTS.length - 1; i >= 0; i--) {
       const p = PRODUCTS[i], t = live.get(p.code);
